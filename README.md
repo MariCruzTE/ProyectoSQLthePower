@@ -6,12 +6,6 @@ guardado en Imgs de archivo png con el esquema de la BBDD
 
 
 
-No, la documentación que te proporcioné no está en formato **Markdown**. A continuación, te la reescribo en formato **Markdown** para que puedas incluirla fácilmente en tu **README**.
-
----
-
-
-
 #### **Ejercicio 35: Encuentra el id del actor más bajo y del actor más alto en la tabla actor.**
 **Objetivo:** Este ejercicio permite encontrar el `actor_id` más bajo y más alto de los actores, lo que puede ser útil para entender el rango de identificadores en la tabla `actor`.
 

@@ -10,11 +10,7 @@ Crea el esquema de la base de datos
 
 Muestra los nombres de todas las películas con una clasificación por edades de 'R'
 
-### 🧠 Análisis
-
-Este ejercicio tiene como objetivo listar todas las películas cuya clasificación por edades sea "R". La clasificación "R" suele indicar que el contenido es solo para adultos o puede contener material sensible.
-
-Pasos:
+### Pasos:
 - Consultamos la tabla `film` para obtener los títulos de las películas.
 - Filtramos las películas que tienen una clasificación específica, en este caso "R".
 - Devolvemos únicamente el título y la clasificación de la película.
@@ -56,20 +52,279 @@ WHERE f.rating = 'R';
 - Esta consulta es útil para entender cómo se distribuyen las películas con contenido para adultos en el catálogo.
 - Si se necesita segmentar este tipo de películas para análisis de contenido o para audiencias específicas, este tipo de filtro es clave.
 ___
+## Ejercicio 3
 
-## Ejercicio 11. Encuentra lo que costó el antepenúltimo alquiler ordenado por día
+Encuentra el nombre de los actores que contengan un "actor_id" entre 30 y 40
 
-### 🧠 Análisis
+### Pasos:
+- Consultamos la tabla `actor` para obtener el `actor_id` y el nombre completo del actor.
+- Filtramos los actores cuyos `actor_id` están entre 30 y 40.
+- Devolvemos el `actor_id` y el nombre del actor.
 
-Se desea obtener el **coste del antepenúltimo alquiler**, ordenado por la fecha de alquiler.  
-La tabla `rental` contiene las fechas de cada alquiler y se relaciona con la tabla `payment` a través del campo `rental_id`, que contiene los importes asociados.
+### 📌 Consulta SQL
 
+```sql
+SELECT
+		a.actor_id AS "id_actor",
+		CONCAT(a.first_name,' ', a.last_name ) AS "nombre_actor"
+FROM actor AS a 
+WHERE a.actor_id BETWEEN 30 AND 40;
+```
+
+### 📊 Resultados (fragmento)
+
+| id_actor | nombre_actor   |
+|----------|----------------|
+| 30       | SANDRA PECK    |
+| 31       | SISSY SOBIESKI |
+| 32       | TIM HACKMAN    |
+| 33       | MILLA PECK     |
+| 34       | AUDREY OLIVIER |
+| 35       | JUDY DEAN      |
+| 36       | BURT DUKAKIS   |
+| 37       | VAL BOLGER     |
+| 38       | TOM MCKELLEN   |
+| 39       | GOLDIE BRODY   |
+
+### ✅ Conclusiones
+
+- La consulta filtra correctamente los actores cuyo `actor_id` está entre 30 y 40, permitiendo obtener información específica de este rango.
+---
+## Ejercicio 4
+
+Obtén las películas cuyo idioma coincide con el idioma original
+
+### Pasos:
+- Consultamos la tabla `film` para obtener el título de la película, el `language_id` y el `original_language_id`.
+- Filtramos las películas cuyo `language_id` coincide con el `original_language_id`.
+- Devolvemos el título de la película y los identificadores de idioma.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT 
+		f.title AS "titulo",
+		f.language_id AS "id_lenguaje",
+		f.original_language_id AS "id_lenguaje_original"
+FROM film AS f 
+WHERE f.language_id = f.original_language_id;
+```
+
+
+### ✅ Conclusiones
+
+- Al intentar filtrar por películas cuyo idioma coincida con el idioma original, no se obtiene ningún resultado debido a que los valores en la columna `original_language_id` son `NULL`, lo que impide la comparación.
+---
+## Ejercicio 5
+
+Ordena las películas por duración de forma ascendente
+
+### Pasos:
+- Consultamos la tabla `film` para obtener el título de la película y la duración.
+- Ordenamos los resultados de forma ascendente según la duración.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT
+		f.title AS "tìtulo",
+		f.length AS "duración"
+FROM film AS f 
+ORDER BY "duración";
+```
+
+### 📊 Resultados (fragmento)
+
+| tìtulo                | duración |
+|-----------------------|----------|
+| KWAI HOMEWARD         | 46       |
+| LABYRINTH LEAGUE      | 46       |
+| IRON MOON             | 46       |
+| ALIEN CENTER          | 46       |
+| RIDGEMONT SUBMARINE   | 46       |
+| SUSPECTS QUILLS       | 47       |
+| HANOVER GALAXY        | 47       |
+| HAWK CHILL            | 47       |
+| HALLOWEEN NUTS        | 47       |
+| SHANGHAI TYCOON       | 47       |
+
+### ✅ Conclusiones
+
+- El ordenamiento de las películas por duración ha sido realizado correctamente en orden ascendente.
+- Los primeros resultados muestran películas con una duración de 46 minutos.
+---
+## Ejercicio 6
+
+Encuentra el nombre y apellido de los actores que tengan 'Allen' en su apellido
+
+### Pasos:
+- Consultamos la tabla `actor` para obtener el nombre y apellido de los actores.
+- Utilizamos la condición `ILIKE` para buscar los apellidos que contengan 'Allen' sin importar mayúsculas/minúsculas.
+- Usamos `DISTINCT` para asegurarnos de que los resultados sean únicos.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT 
+	DISTINCT (CONCAT(a.first_name, ' ', a.last_name)) AS "nombre_completo"
+FROM actor AS a 
+WHERE a.last_name ILIKE  'Allen';
+```
+
+### 📊 Resultados (fragmento)
+
+| nombre_completo |
+|-----------------|
+| CUBA ALLEN      |
+| KIM ALLEN       |
+| MERYL ALLEN     |
+
+### ✅ Conclusiones
+
+- La consulta devuelve los actores cuyos apellidos son exactamente 'Allen', sin importar las mayúsculas o minúsculas.
+- Se obtienen tres resultados únicos.
+---
+## Ejercicio 7
+
+Encuentra la cantidad total de películas en cada clasificación de la tabla "film" y muestra la clasificación junto con el recuento.
+
+### Pasos:
+- Consultamos la tabla `film` para obtener la clasificación de las películas y contar cuántas hay por cada clasificación.
+- Utilizamos la función de agregación `COUNT()` para contar el número de películas.
+- Agrupamos los resultados por la columna `rating` y ordenamos por el total de películas.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT 
+		f.rating AS "clasificación",
+		COUNT(f.film_id ) AS "total_peliculas"		
+FROM film AS f 
+GROUP BY rating 
+ORDER BY total_peliculas;
+```
+
+### 📊 Resultados (fragmento)
+
+| clasificación | total_peliculas |
+|---------------|-----------------|
+| G             | 178             |
+| PG            | 194             |
+| R             | 195             |
+| NC-17         | 210             |
+| PG-13         | 223             |
+
+### ✅ Conclusiones
+
+- La consulta muestra la cantidad total de películas por cada clasificación.
+- El número de películas varía según la clasificación, con la categoría 'PG-13' teniendo la mayor cantidad de películas.
+---
+## Ejercicio 8
+
+Encuentra el título de todas las películas que son 'PG-13' o tienen una duración mayor a 3 horas en la tabla "film".
+
+### Pasos:
+- Consultamos la tabla `film` para obtener el título, clasificación y duración de las películas.
+- Aplicamos la condición de que la duración sea mayor a 180 minutos (3 horas) o que la clasificación sea 'PG-13'.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT 
+		f.title AS "película",
+		f.rating AS "clasificación",
+		f.length AS "duración"
+FROM film AS f 
+WHERE length > 180
+   OR rating = 'PG-13';
+```
+
+### 📊 Resultados (fragmento)
+
+| película                   | clasificación | duración |
+|----------------------------|---------------|----------|
+| AIRPLANE SIERRA             | PG-13         | 62       |
+| ALABAMA DEVIL               | PG-13         | 114      |
+| ALTER VICTORY               | PG-13         | 57       |
+| ANALYZE HOOSIERS            | R             | 181      |
+| ANTHEM LUKE                 | PG-13         | 91       |
+| APOLLO TEEN                 | PG-13         | 153      |
+| ARACHNOPHOBIA ROLLERCOASTER | PG-13         | 147      |
+| ARGONAUTS TOWN              | PG-13         | 127      |
+| ATTACKS HATE                | PG-13         | 113      |
+| ATTRACTION NEWTON           | PG-13         | 83       |
+| ...                         | ...           | ...      |
+
+### ✅ Conclusiones
+
+- La consulta devuelve todas las películas que son 'PG-13' o tienen una duración mayor a 3 horas.
+- Muchos de los resultados son películas de clasificación 'PG-13', y algunas alcanzan o superan las 3 horas de duración.
+---
+## Ejercicio 9
+
+Encuentra la variabilidad de lo que costaría reemplazar las películas.
+
+### Pasos:
+- Consultamos la tabla `film` para calcular la desviación estándar (`STDDEV`) de los costos de reemplazo de las películas (`replacement_cost`).
+- Usamos la función `ROUND` para redondear el resultado a 2 decimales.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT 
+    ROUND(STDDEV(replacement_cost), 2) AS "Desviación_Estándar"
+FROM film;
+```
+
+### 📊 Resultado
+
+| Desviación_Estándar |
+|---------------------|
+| 6,05                |
+
+### ✅ Conclusiones
+
+- La desviación estándar del costo de reemplazo de las películas es de 6,05.
+- Esto indica que los costos de reemplazo de las películas varían en un promedio de 6,05 unidades monetarias respecto a la media.
+---
+## Ejercicio 10
+
+Encuentra la mayor y menor duración de una película en la base de datos.
+
+### Pasos:
+- Consultamos la tabla `film` para obtener la duración mínima (`MIN`) y máxima (`MAX`) de las películas, utilizando la columna `length`.
+  
+### 📌 Consulta SQL
+
+```sql
+SELECT
+    MIN(f.length) AS "duración_mínima",
+    MAX(f.length) AS "duración_mánima"
+FROM film AS f;
+```
+
+### 📊 Resultado
+
+| duración_mínima | duración_mánima |
+|-----------------|-----------------|
+| 46              | 185             |
+
+### ✅ Conclusiones
+
+- La duración mínima de una película en la base de datos es de 46 minutos.
+- La duración máxima de una película en la base de datos es de 185 minutos.
+
+---
+## Ejercicio 11. 
+Encuentra lo que costó el antepenúltimo alquiler ordenado por día
+
+### Pasos:
 Para obtener el antepenúltimo registro simplemente:
 - Ordenamos por `rental_date` en orden descendente (`DESC`).
 - Usamos `OFFSET 2 LIMIT 1` para acceder al tercer elemento (antepenúltimo) en ese orden.
 - Utilizamos un `LEFT JOIN` entre `rental` y `payment` para incluir aquellos alquileres que puedan no tener pago registrado (aunque en este caso probablemente sí lo tengan).
 
-### 🧾 Consulta SQL
+###  Consulta SQL
 
 ```sql
 SELECT 
@@ -91,28 +346,416 @@ LIMIT 1;
 | 11.676      | 2006-02-14 15:16:03.000 | 0               |
 
 ### ✅ Conclusión
-
 El antepenúltimo alquiler registrado en la base de datos (ordenado por fecha de alquiler descendente) tuvo un **importe de 0**.  
 Esto puede indicar que fue un alquiler gratuito, promocional, o bien que el pago no se registró correctamente. En cualquier caso, es importante notar que hay registros con importe cero y que convendría analizarlos si se estuviera realizando un estudio financiero.
 
+---
+## Ejercicio 12
 
-### Ejercicio 35: Encuentra el id del actor más bajo y del actor más alto en la tabla actor.**
-**Objetivo:** Este ejercicio permite encontrar el `actor_id` más bajo y más alto de los actores, lo que puede ser útil para entender el rango de identificadores en la tabla `actor`.
+Encuentra el título de películas que no sean de clasificación 'NC-17' ni 'G'.
 
-**Consulta SQL utilizada:**
+### Pasos:
+- Consultamos la tabla `film` para obtener los títulos de las películas cuya clasificación no sea 'NC-17' ni 'G'.
+- Usamos la cláusula `NOT IN` para excluir estas clasificaciones.
+  
+### 📌 Consulta SQL
+
 ```sql
-SELECT 
-    MIN(a.actor_id) AS "min", 
-    MAX(a.actor_id) AS "max"
-FROM actor AS a;
+SELECT
+    f.title AS "título",
+    f.rating AS "clasificación"
+FROM film AS f 
+WHERE f.rating NOT IN ('NC-17','G');
 ```
 
-**Explicación:**
-- `MIN()` se usa para encontrar el valor más bajo en la columna `actor_id`, y `MAX()` para el valor más alto.
-- Este análisis es útil para conocer el rango de IDs en la tabla `actor`.
+### 📊 Resultado
+
+| título                | clasificación |
+|-----------------------|---------------|
+| ACADEMY DINOSAUR      | PG            |
+| AGENT TRUMAN          | PG            |
+| AIRPLANE SIERRA       | PG-13         |
+| AIRPORT POLLOCK       | R             |
+| ALABAMA DEVIL         | PG-13         |
+| ALASKA PHANTOM        | PG            |
+| ALI FOREVER           | PG            |
+| ALONE TRIP            | R             |
+| ALTER VICTORY         | PG-13         |
+| AMADEUS HOLY          | PG            |
+
+### ✅ Conclusiones
+- Se han encontrado varias películas en la base de datos que no pertenecen a las clasificaciones 'NC-17' ni 'G', incluidas clasificaciones como 'PG', 'PG-13' y 'R'.
+---
+## Ejercicio 13
+
+Encuentra el promedio de duración de las películas para cada clasificación de la tabla `film` y muestra la clasificación junto con el promedio de duración.
+
+### Pasos:
+- La consulta se realiza sobre la tabla `film` para calcular el promedio de la duración de las películas, agrupadas por su clasificación.
+- Se utiliza la función de agregación `AVG(f.length)` para calcular el promedio de la duración de las películas en cada clasificación.
+- El resultado se redondea a dos decimales con la función `ROUND()`.
+- Finalmente, se ordenan los resultados en orden descendente por el promedio de duración.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT
+    f.rating AS "clasificación",
+    ROUND(AVG(f.length),2) AS "promedio-duración"
+FROM film AS f 
+GROUP BY f.rating
+ORDER BY "promedio-duración" DESC;
+```
+
+### 📊 Resultado
+
+| clasificación | promedio-duración |
+|---------------|-------------------|
+| PG-13         | 120,44            |
+| R             | 118,66            |
+| NC-17         | 113,23            |
+| PG            | 112,01            |
+| G             | 111,05            |
+
+### ✅ Conclusiones
+
+- **Películas más largas**: Las clasificaciones **PG-13** (120,44 min) y **R** (118,66 min) tienen las películas más largas, probablemente por su contenido más complejo y maduro.
+- **Películas más cortas**: Las **G** son las más cortas (111,05 min), ya que suelen ser más directas y para un público joven.
+- **Tendencia general**: Las películas dirigidas a audiencias más específicas, como **PG-13** y **R**, tienden a ser más largas, mientras que las de **G** y **PG** son más cortas y sencillas.
+---
+## Ejercicio 14
+
+Encuentra el título de todas las películas que tengan una duración mayor a 180 minutos.
+
+### Pasos:
+- Consultamos la tabla `film` para obtener el título y la duración de las películas.
+- Aplicamos la condición de que la duración sea mayor a 180 minutos.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT 
+    f.title AS "título",
+    f.length AS "duración"
+FROM film AS f 
+WHERE f.length > 180;
+```
+### 📊 Resultado (parcial)
+
+| título              | duración |
+|---------------------|----------|
+| ANALYZE HOOSIERS    | 181      |
+| BAKED CLEOPATRA     | 182      |
+| CATCH AMISTAD       | 183      |
+| CHICAGO NORTH       | 185      |
+| CONSPIRACY SPIRIT   | 184      |
+| CONTROL ANTHEM      | 185      |
+| CRYSTAL BREAKING    | 184      |
+| DARN FORRESTER      | 185      |
+| FRONTIER CABIN      | 183      |
+| GANGS PRIDE         | 185      |
+| ...                 | ...      |
+
+### ✅ Conclusiones
+- **Películas más largas**: 
+	- Las películas con una duración superior a 180 minutos oscilan entre 181 y 185 minutos.
+- **Tendencia general**: 
+	- La mayoría de las películas con duración superior a 180 minutos tienen una duración cercana a los 185 minutos, indicando que estas son más extensas pero no superan las 3 horas.
+- **Variedad en géneros**: 
+	- La duración de estas películas es relativamente uniforme, lo que sugiere que el tiempo no está ligado a un género en particular, sino más bien al tipo de contenido.
+---
+## Ejercicio 15
+
+¿Cuánto dinero ha generado en total la empresa?
+
+### Pasos:
+- Consultamos la tabla `payment` para obtener la suma de todas las cantidades pagadas (`amount`).
+- Aplicamos la función `SUM()` para calcular el total de las facturas.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT SUM(p.amount) AS "total_facturado"
+FROM payment AS p;
+```
+### 📊 Resultado 
+| total_facturado |
+|-----------------|
+| 67416.51        |
+
+### ✅ Conclusiones
+- **Total facturado**: La empresa ha generado un total de **67,416.51** unidades monetarias, lo que refleja las sumas de todas las transacciones de pago registradas en la base de datos.
+- **Implicaciones**: Este valor muestra el ingreso total generado hasta la fecha, lo que puede ser útil para realizar análisis financieros y tomar decisiones estratégicas.
+---
+## Ejercicio 16
+
+Muestra los 10 clientes con mayor valor de ID.
+
+### Pasos:
+- Consultamos la tabla `customer` para obtener el identificador de los clientes (`customer_id`).
+- Ordenamos los resultados en orden descendente para que aparezcan los valores más altos primero.
+- Limitamos la salida a los 10 primeros registros.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT c.customer_id AS "cliente"
+FROM customer AS c 
+ORDER BY cliente DESC 
+LIMIT 10;
+```
+### 📊 Resultado 
+| cliente |
+|---------|
+| 599     |
+| 598     |
+| 597     |
+| 596     |
+| 595     |
+| 594     |
+| 593     |
+| 592     |
+| 591     |
+| 590     |
+
+### ✅ Conclusiones
+- **Clientes con ID más alto**: Se han listado los 10 clientes con los IDs más recientes o más altos, lo que puede ser útil para identificar registros nuevos en la base de datos.
+
+---
+## Ejercicio 17
+
+Encuentra el nombre y apellido de los actores que aparecen en la película con título 'Egg Igby'.
+
+### Pasos:
+- Consultamos la tabla `actor` para obtener los nombres y apellidos.
+- Utilizamos `JOIN` con `film_actor` para relacionar actores con películas.
+- Hacemos otro `JOIN` con `film` para filtrar por el título 'Egg Igby'.
+- Aplicamos `ILIKE` para asegurar una búsqueda insensible a mayúsculas y minúsculas.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT
+    concat(a.first_name, ' ', a.last_name) AS "
+### 📊 Resultado (parcial)
+
+### ✅ Conclusiones
+
 
 ---
 
+```
+### 📊 Resultado 
+| nombre_actor    |
+|-----------------|
+| LUCILLE TRACY   |
+| TOM MCKELLEN    |
+| NATALIE HOPKINS |
+| MERYL GIBSON    |
+| OPRAH KILMER    |
+
+### ✅ Conclusiones
+- **Reparto completo**: La película 'Egg Igby' cuenta con cinco actores.
+- **Variedad de intérpretes**: Se incluyen tanto nombres masculinos como femeninos, lo que sugiere un reparto equilibrado.
+- **Relaciones entre tablas**: Este ejercicio muestra cómo conectar múltiples tablas para obtener información cruzada entre actores y películas.
+---
+## Ejercicio 18
+
+Selecciona todos los nombres de las películas únicos.
+
+### 📌 Consulta SQL
+
+```sql
+SELECT DISTINCT f.title AS "título"
+FROM film AS f;
+```
+### 📊 Resultados
+
+| título                |
+|-----------------------|
+| ITALIAN AFRICAN       |
+| FICTION CHRISTMAS     |
+| BADMAN DAWN           |
+| LEGALLY SECRETARY     |
+| PELICAN COMFORTS      |
+| SEARCHERS WAIT        |
+| STALLION SUNDANCE     |
+| FRONTIER CABIN        |
+| TERMINATOR CLUB       |
+| WRONG BEHAVIOR        |
+| ...                   |
+
+### ✅ Conclusiones
+- **Cantidad de títulos**: 
+	-Se han recuperado 1000 títulos únicos, lo que permite verificar la diversidad del catálogo.
+- **Uso de DISTINCT**: 
+	-Es útil para eliminar duplicados cuando se busca solo una instancia por valor.
+---
+## Ejercicio 19
+
+Encuentra el título de las películas que son comedias y tienen una duración mayor a 180 minutos en la tabla "film".
+
+```sql
+SELECT 
+    f.title AS "título",
+    c.name AS "categoría",
+    f.length  AS "duración"
+FROM category AS c  
+    LEFT JOIN film_category AS fc 
+        ON c.category_id = fc.category_id
+    LEFT JOIN film AS f 
+        ON fc.film_id = f.film_id
+WHERE f.length > 180
+AND c.name = 'Comedy';
+```
+
+### Resultados
+
+| título         | categoría | duración |
+|----------------|-----------|----------|
+| CONTROL ANTHEM | Comedy    | 185      |
+| SATURN NAME    | Comedy    | 182      |
+| SEARCHERS WAIT | Comedy    | 182      |
+
+### Conclusiones
+
+- **Películas encontradas**: Solo hay 3 películas de comedia con una duración superior a 180 minutos.
+- **Duración extensa**: Las tres películas superan las 3 horas, algo inusual para el género de comedia.
+- **Tendencia atípica**: Este resultado sugiere que las comedias largas son una excepción dentro del catálogo.
+
+---
+## Ejercicio 20
+
+Encuentra las categorías de películas que tienen un promedio de duración superior a 110 minutos. Muestra el nombre de la categoría junto con el promedio de duración.
+
+### Pasos
+
+1. Se parte de la tabla `category` para obtener los nombres de las categorías.
+2. Se realiza un `LEFT JOIN` con `film_category` para relacionar cada categoría con sus películas.
+3. Se hace otro `LEFT JOIN` con la tabla `film` para acceder a la duración de las películas.
+4. Se agrupan los resultados por categoría (`GROUP BY`).
+5. Se calcula la duración media de las películas con `AVG(f.length)` y se redondea con `ROUND`.
+6. Se filtran las categorías con una duración media superior a 110 minutos mediante `HAVING`.
+7. Se ordenan los resultados por duración promedio de forma ascendente.
+
+```sql
+SELECT 
+    c.name AS "categoría",
+    ROUND(AVG(f.length), 2) AS "promedio_duración"
+FROM category AS c  
+    LEFT JOIN film_category AS fc 
+        ON c.category_id = fc.category_id
+    LEFT JOIN film AS f 
+        ON fc.film_id = f.film_id
+GROUP BY c."name"
+HAVING ROUND(AVG(f.length), 2) > 110
+ORDER BY "promedio_duración";
+```
+
+### Resultados
+
+| categoría | promedio_duración |
+|-----------|-------------------|
+| Animation | 111,02            |
+| New       | 111,13            |
+| Action    | 111,61            |
+| Classics  | 111,67            |
+| Horror    | 112,48            |
+| Travel    | 113,32            |
+| Music     | 113,65            |
+| Family    | 114,78            |
+| Comedy    | 115,83            |
+| Drama     | 120,84            |
+| Foreign   | 121,70            |
+| Games     | 127,84            |
+| Sports    | 128,20            |
+
+### Conclusiones
+
+- **Total de categorías con media superior a 110 min**: 13 categorías.
+- **Categorías destacadas**: *Sports* y *Games* presentan las mayores duraciones promedio.
+- **Observación general**: Las categorías con mayor carga temática o narrativa parecen requerir más tiempo de desarrollo.
+
+---
+## Ejercicio 21
+
+¿Cuál es el promedio de duración del alquiler de las películas?
+
+### Pasos
+
+1. Se parte de la tabla `film` para acceder a los datos de las películas.
+2. Se utiliza la columna `rental_duration` para calcular el promedio de la duración del alquiler.
+3. Se utiliza la función `AVG()` para obtener el promedio y `ROUND()` para redondearlo a dos decimales.
+
+```sql
+SELECT ROUND(AVG(f.rental_duration), 2) AS "duracion_alquiler_promedio"
+FROM film AS f;
+```
+
+### Resultados
+
+| duracion_alquiler_promedio |
+|----------------------------|
+| 4,99                       |
+
+### Conclusiones
+
+- **Promedio de duración del alquiler**: El promedio de duración del alquiler de las películas es de **4,99 días**.
+- **Tendencia**: La duración de alquiler es cercana a 5 días, lo que sugiere que la mayoría de los alquileres tienen una duración de aproximadamente una semana o menos.
+
+---
+
+## Ejercicio 22
+
+Crea una columna con el nombre y apellidos de todos los actores y actrices.
+
+### Pasos
+
+1. Se parte de la tabla `actor` para acceder a los datos de los actores y actrices.
+2. Se utiliza la función `CONCAT()` para combinar el `first_name` y el `last_name` en una sola columna denominada "nombre_completo_actor".
+3. Se ordenan los resultados alfabéticamente por el nombre completo de los actores.
+
+```sql
+SELECT CONCAT(a.first_name, ' ', a.last_name ) AS "nombre_completo_actor"
+FROM actor AS a 
+ORDER BY nombre_completo_actor;
+```
+
+### Resultados (Fragmento parcial)
+
+| nombre_completo_actor |
+|-----------------------|
+| ADAM GRANT            |
+| ADAM HOPPER           |
+| AL GARLAND            |
+| ALAN DREYFUSS         |
+| ALBERT JOHANSSON      |
+| ALBERT NOLTE          |
+| ALEC WAYNE            |
+| ANGELA HUDSON         |
+| ANGELA WITHERSPOON    |
+| ANGELINA ASTAIRE      |
+| ...                   |
+| ZERO CAGE             |
+
+
+
+### Conclusiones
+
+- **Total de actores/actrices listados**: 
+	- El número total de actores y actrices que aparecen en la tabla es de **200**.
+- **Información**: 
+	- Los nombres completos se ordenan alfabéticamente, lo que facilita la búsqueda y el análisis de los datos relacionados con los actores en el sistema.
+---
+
+
+---
+
+
+---
+
+
+---
 #### **Ejercicio 36: Cuenta cuántos actores hay en la tabla "actor".**
 **Objetivo:** El ejercicio tiene como objetivo contar la cantidad total de actores en la tabla `actor`. Este dato puede ser útil para comprender el tamaño de la base de datos de actores.
 

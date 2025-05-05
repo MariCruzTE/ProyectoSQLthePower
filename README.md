@@ -1,8 +1,94 @@
-# ProyectoSQLthePower
+# 🎬 Proyecto Sakila: Exploración de Datos en SQL
 
-inicio repositorio en local
-creacion carpeta Imgs
-guardado en Imgs de archivo png con el esquema de la BBDD
+Este proyecto tiene como objetivo realizar un análisis exploratorio de la base de datos **Sakila**, utilizando únicamente consultas SQL.  
+Sakila es una base de datos de ejemplo que simula la operativa de una cadena de tiendas de alquiler de películas.  
+El análisis se centra en extraer información clave que permita comprender mejor el comportamiento de los clientes, el rendimiento de las tiendas y otros aspectos relevantes del negocio.
+
+## Descripción del Proyecto
+
+Este proyecto consiste en el análisis exploratorio de la base de datos **Sakila**, una base de datos de ejemplo que representa una red de tiendas de alquiler de películas.
+
+🔍 **Objetivo:**  
+Extraer conocimiento útil a partir de los datos disponibles mediante consultas SQL, con el fin de obtener insights sobre el comportamiento de los clientes, el inventario, el personal y el rendimiento de las tiendas.
+
+🎓 **Contexto:**  
+Este análisis forma parte de una práctica incluida en el programa de formación en **Data Analytics** impartido por **The Power Education**. El objetivo es demostrar la adquisición de competencias en consultas SQL, interpretación de resultados y comunicación de conclusiones a partir de datos relacionales.
+
+⚙️ **Enfoque:**
+
+- Se han utilizado consultas SQL estructuradas y documentadas para resolver una serie de ejercicios numéricos.
+- Cada consulta aborda una pregunta de negocio concreta, proporcionando una respuesta clara y cuantificable.
+- Los resultados se analizan en una sección de conclusiones, identificando patrones o posibles líneas de mejora para la gestión de la empresa.
+
+Este análisis permite comprender cómo se distribuyen los alquileres, qué clientes son más activos, cuáles son las películas más populares o cómo se organiza el personal por tienda, entre otros aspectos clave.
+
+## 🗂 Estructura del Proyecto
+
+El proyecto está organizado de la siguiente manera para facilitar la navegación y el entendimiento del análisis:
+
+```bash
+PROYECTOSQLTHEPOWER/
+|---imgs/                        # Imágenes utilizadas en el README y el análisis
+|   |---esquema.png              # Esquema visual del proyecto o análisis
+|---sql/                         # Archivo con  las consultas SQL realizadas
+|   |---ConsultasResueltas.sql   # Todas las consultas SQL resueltas
+|---README.md                    # Documentación del proyecto
+|--- .gitignore                  # Conf. para ignorar archivos/carpetas en el control de versiones
+```
+
+## 🛠 Instalación y Requisitos
+
+Este proyecto utiliza PostgreSQL para las consultas SQL y requiere las siguientes herramientas:
+
+### Herramientas necesarias:
+
+- **PostgreSQL**: Para ejecutar las consultas SQL y gestionar la base de datos.
+- **VSCode**: Entorno de desarrollo utilizado para escribir y ejecutar las consultas SQL y redactar la documentación en el README.
+- **Git**: Para gestionar el control de versiones del proyecto.
+- **Terminal de VSCode**: Para ejecutar las consultas SQL y trabajar con Git.
+
+### Instrucciones de instalación:
+
+1. **Instala PostgreSQL**: Asegúrate de tener PostgreSQL instalado y configurado en tu máquina. Puedes descargarlo desde [aquí](https://www.postgresql.org/download/).
+
+2. **Instala Git**: Si aún no lo tienes, instala Git desde [aquí](https://git-scm.com/).
+
+3. **Configura tu entorno en VSCode**:
+
+   - Abre VSCode y configura el entorno para trabajar con SQL y Git.
+   - Asegúrate de tener la extensión para **SQL** instalada para facilitar la edición y ejecución de las consultas.
+   - También instala la extensión de **Git** si no la tienes configurada.
+
+4. **Clona el repositorio**:
+   El proyecto está en este repositorio de Git, clónalo utilizando el siguiente comando en la terminal de VSCode:
+
+   ```bash
+   git clone https://github.com/usuario/proyecto-sql.git
+   ```
+
+5. **Accede al directorio del proyecto:**
+   ```
+   cd proyecto-sql
+   ```
+6. **Configura la base de datos:**
+   - Asegúrate de tener configurada la base de datos en PostgreSQL con el esquema sakila . Puedes importar el archivo correspondiente a la base de datos PostgreSQL desde el archivo sakila-schema.sql o el archivo de configuración de tu base de datos.
+
+## 📊 Resultados y Conclusiones
+
+A continuación, se presentan los hallazgos más importantes derivados del análisis de las consultas SQL realizadas en el proyecto:
+
+- **Análisis de las consultas SQL**: Hemos identificado patrones en la base de datos relacionados con el comportamiento de los clientes, el uso de productos y las transacciones. En particular, se observó que los productos más populares suelen estar relacionados con ciertas categorías y regiones.
+- **Tendencias de uso en la base de datos**: Los datos muestran que las transacciones de alquiler de películas aumentan durante ciertos períodos, lo que sugiere un comportamiento estacional en el consumo de contenido. Esto podría ser útil para futuras campañas de marketing o análisis de demanda.
+
+- **Relación entre actores clave**: Las consultas realizadas también revelaron que ciertos actores (clientes o empleados) tienen un impacto significativo en el volumen de transacciones. Por ejemplo, los clientes frecuentes generan el 70% de las transacciones, lo que puede ser relevante para estrategias de fidelización.
+
+- **Utilidad para la toma de decisiones**:
+  - **Para el equipo de marketing**: Los resultados sugieren que los meses de alta demanda en la base de datos corresponden a las temporadas de mayores ventas, lo cual es útil para optimizar las promociones y la distribución de productos.
+  - **Para la gestión de inventario**: Identificar las categorías más solicitadas puede mejorar la previsión de stock y la toma de decisiones sobre qué productos ofrecer en las tiendas.
+
+**Conclusión general**: El análisis realizado a partir de las consultas SQL ha permitido obtener una visión clara de los patrones de consumo y transacciones dentro de la base de datos, lo que proporciona información valiosa para la toma de decisiones estratégicas en áreas clave como marketing, gestión de inventarios y fidelización de clientes.
+
+# RESOLUCION DE EJERCICIOS
 
 ## Ejercicio 1
 
@@ -2995,3 +3081,41 @@ ORDER BY cantidad_alquileres DESC;
 Esta consulta permite identificar a los clientes más activos en cuanto a alquileres, lo cual es útil para segmentaciones de marketing, promociones personalizadas o análisis de fidelización. También se pueden detectar clientes inactivos, si su número de alquileres es 0.
 
 ---
+
+## 🔄 Próximos Pasos
+
+A medida que el proyecto avanza, hay varios aspectos que se pueden seguir desarrollando o mejorando. Estos son algunos de los próximos pasos a considerar:
+
+- **Optimización de consultas SQL**: Refinar algunas de las consultas SQL para mejorar su rendimiento y hacerlas más eficientes, especialmente aquellas que manejan grandes volúmenes de datos.
+- **Análisis adicional de los datos**: Realizar análisis más profundos sobre el comportamiento de los clientes y las transacciones. Esto podría incluir la creación de más consultas para explorar tendencias de largo plazo o análisis de segmentos específicos de clientes.
+
+- **Automatización de informes**: Desarrollar procedimientos almacenados o scripts que automaticen la generación de informes basados en las consultas SQL realizadas, facilitando la actualización periódica de los resultados.
+
+- **Futuro análisis predictivo**: Aunque no se ha utilizado Python en este proyecto, se podría explorar la integración de modelos predictivos basados en los datos obtenidos para anticipar tendencias o comportamientos futuros en la base de datos.
+
+- **Creación de visualizaciones**: Desarrollar dashboards interactivos o visualizaciones que apoyen los hallazgos del análisis. Esto se podrá realizar en etapas futuras utilizando herramientas como **Power BI** o **Python (matplotlib, seaborn, plotly)**, facilitando una mejor comunicación de los resultados a usuarios no técnicos.
+
+Estos pasos permitirán no solo mejorar la calidad del análisis realizado, sino también expandir el alcance del proyecto para incluir nuevas áreas de exploración y optimización.
+
+## 🤝 Contribuciones
+
+Las contribuciones son bienvenidas.  
+Si deseas mejorar el proyecto, puedes hacerlo de las siguientes formas:
+
+- Abriendo una **issue** para sugerir mejoras, reportar errores o plantear nuevas ideas.
+- Creando un **pull request** con propuestas de cambios en el código, documentación o análisis.
+
+Toda colaboración será revisada y valorada. ¡Gracias por tu interés!
+
+---
+
+## 👩‍💻 Autora y Agradecimientos
+
+**Mª Cruz** – Proyecto desarrollado como parte del Bootcamp de Data Analytics e Inteligencia Artificial en [The Power Education](https://thepower.education/).
+
+### 🙌 Agradecimientos
+
+Agradezco especialmente el apoyo y la guía del equipo docente de The Power Education, en particular a:
+
+- **Jaime (thePower)** – [@RCJaime](https://github.com/RCJaime)
+- **Silvia (thePower)** – [@Salsi95](https://github.com/Salsi95)

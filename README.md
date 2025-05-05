@@ -1,9 +1,12 @@
 # ProyectoSQLthePower
+
 inicio repositorio en local
 creacion carpeta Imgs
 guardado en Imgs de archivo png con el esquema de la BBDD
+
 ## Ejercicio 1
-Crea el esquema de la base de datos 
+
+Crea el esquema de la base de datos
 **(Añadido png en carpeta "Imgs")**
 
 ## Ejercicio 2
@@ -11,6 +14,7 @@ Crea el esquema de la base de datos
 Muestra los nombres de todas las películas con una clasificación por edades de 'R'
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener los títulos de las películas.
 - Filtramos las películas que tienen una clasificación específica, en este caso "R".
 - Devolvemos únicamente el título y la clasificación de la película.
@@ -18,45 +22,48 @@ Muestra los nombres de todas las películas con una clasificación por edades de
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 			
-	f.title AS "titulo",		
+SELECT
+	f.title AS "titulo",
 	f.rating AS "clasificacion"
-FROM film AS f 			
+FROM film AS f
 WHERE f.rating = 'R';
 ```
 
 ### 📊 Resultados
 
-| titulo                 | clasificacion |
-|------------------------|---------------|
-| AIRPORT POLLOCK        | R             |
-| ALONE TRIP             | R             |
-| AMELIE HELLFIGHTERS    | R             |
-| AMERICAN CIRCUS        | R             |
-| ANACONDA CONFESSIONS   | R             |
-| ANALYZE HOOSIERS       | R             |
-| ANYTHING SAVANNAH      | R             |
-| APOCALYPSE FLAMINGOS   | R             |
-| BOULEVARD MOB          | R             |
-| ARMY FLINTSTONES       | R             |
-| BADMAN DAWN            | R             |
-| BANGER PINOCCHIO       | R             |
-| BEAR GRACELAND         | R             |
-| BEAST HUNCHBACK        | R             |
-| BEVERLY OUTLAW         | R             |
-| ...                    | ...           |
+| titulo               | clasificacion |
+| -------------------- | ------------- |
+| AIRPORT POLLOCK      | R             |
+| ALONE TRIP           | R             |
+| AMELIE HELLFIGHTERS  | R             |
+| AMERICAN CIRCUS      | R             |
+| ANACONDA CONFESSIONS | R             |
+| ANALYZE HOOSIERS     | R             |
+| ANYTHING SAVANNAH    | R             |
+| APOCALYPSE FLAMINGOS | R             |
+| BOULEVARD MOB        | R             |
+| ARMY FLINTSTONES     | R             |
+| BADMAN DAWN          | R             |
+| BANGER PINOCCHIO     | R             |
+| BEAR GRACELAND       | R             |
+| BEAST HUNCHBACK      | R             |
+| BEVERLY OUTLAW       | R             |
+| ...                  | ...           |
 
 ### ✅ Conclusiones
 
 - Las películas con clasificación "R" son generalmente más populares en géneros como terror, crimen y drama.
 - Esta consulta es útil para entender cómo se distribuyen las películas con contenido para adultos en el catálogo.
 - Si se necesita segmentar este tipo de películas para análisis de contenido o para audiencias específicas, este tipo de filtro es clave.
-___
+
+---
+
 ## Ejercicio 3
 
 Encuentra el nombre de los actores que contengan un "actor_id" entre 30 y 40
 
 ### Pasos:
+
 - Consultamos la tabla `actor` para obtener el `actor_id` y el nombre completo del actor.
 - Filtramos los actores cuyos `actor_id` están entre 30 y 40.
 - Devolvemos el `actor_id` y el nombre del actor.
@@ -67,14 +74,14 @@ Encuentra el nombre de los actores que contengan un "actor_id" entre 30 y 40
 SELECT
 		a.actor_id AS "id_actor",
 		CONCAT(a.first_name,' ', a.last_name ) AS "nombre_actor"
-FROM actor AS a 
+FROM actor AS a
 WHERE a.actor_id BETWEEN 30 AND 40;
 ```
 
 ### 📊 Resultados (fragmento)
 
 | id_actor | nombre_actor   |
-|----------|----------------|
+| -------- | -------------- |
 | 30       | SANDRA PECK    |
 | 31       | SISSY SOBIESKI |
 | 32       | TIM HACKMAN    |
@@ -89,12 +96,15 @@ WHERE a.actor_id BETWEEN 30 AND 40;
 ### ✅ Conclusiones
 
 - La consulta filtra correctamente los actores cuyo `actor_id` está entre 30 y 40, permitiendo obtener información específica de este rango.
+
 ---
+
 ## Ejercicio 4
 
 Obtén las películas cuyo idioma coincide con el idioma original
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener el título de la película, el `language_id` y el `original_language_id`.
 - Filtramos las películas cuyo `language_id` coincide con el `original_language_id`.
 - Devolvemos el título de la película y los identificadores de idioma.
@@ -102,24 +112,26 @@ Obtén las películas cuyo idioma coincide con el idioma original
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 
+SELECT
 		f.title AS "titulo",
 		f.language_id AS "id_lenguaje",
 		f.original_language_id AS "id_lenguaje_original"
-FROM film AS f 
+FROM film AS f
 WHERE f.language_id = f.original_language_id;
 ```
-
 
 ### ✅ Conclusiones
 
 - Al intentar filtrar por películas cuyo idioma coincida con el idioma original, no se obtiene ningún resultado debido a que los valores en la columna `original_language_id` son `NULL`, lo que impide la comparación.
+
 ---
+
 ## Ejercicio 5
 
 Ordena las películas por duración de forma ascendente
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener el título de la película y la duración.
 - Ordenamos los resultados de forma ascendente según la duración.
 
@@ -129,35 +141,38 @@ Ordena las películas por duración de forma ascendente
 SELECT
 		f.title AS "tìtulo",
 		f.length AS "duración"
-FROM film AS f 
+FROM film AS f
 ORDER BY "duración";
 ```
 
 ### 📊 Resultados (fragmento)
 
-| tìtulo                | duración |
-|-----------------------|----------|
-| KWAI HOMEWARD         | 46       |
-| LABYRINTH LEAGUE      | 46       |
-| IRON MOON             | 46       |
-| ALIEN CENTER          | 46       |
-| RIDGEMONT SUBMARINE   | 46       |
-| SUSPECTS QUILLS       | 47       |
-| HANOVER GALAXY        | 47       |
-| HAWK CHILL            | 47       |
-| HALLOWEEN NUTS        | 47       |
-| SHANGHAI TYCOON       | 47       |
+| tìtulo              | duración |
+| ------------------- | -------- |
+| KWAI HOMEWARD       | 46       |
+| LABYRINTH LEAGUE    | 46       |
+| IRON MOON           | 46       |
+| ALIEN CENTER        | 46       |
+| RIDGEMONT SUBMARINE | 46       |
+| SUSPECTS QUILLS     | 47       |
+| HANOVER GALAXY      | 47       |
+| HAWK CHILL          | 47       |
+| HALLOWEEN NUTS      | 47       |
+| SHANGHAI TYCOON     | 47       |
 
 ### ✅ Conclusiones
 
 - El ordenamiento de las películas por duración ha sido realizado correctamente en orden ascendente.
 - Los primeros resultados muestran películas con una duración de 46 minutos.
+
 ---
+
 ## Ejercicio 6
 
 Encuentra el nombre y apellido de los actores que tengan 'Allen' en su apellido
 
 ### Pasos:
+
 - Consultamos la tabla `actor` para obtener el nombre y apellido de los actores.
 - Utilizamos la condición `ILIKE` para buscar los apellidos que contengan 'Allen' sin importar mayúsculas/minúsculas.
 - Usamos `DISTINCT` para asegurarnos de que los resultados sean únicos.
@@ -165,16 +180,16 @@ Encuentra el nombre y apellido de los actores que tengan 'Allen' en su apellido
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 
+SELECT
 	DISTINCT (CONCAT(a.first_name, ' ', a.last_name)) AS "nombre_completo"
-FROM actor AS a 
+FROM actor AS a
 WHERE a.last_name ILIKE  'Allen';
 ```
 
 ### 📊 Resultados (fragmento)
 
 | nombre_completo |
-|-----------------|
+| --------------- |
 | CUBA ALLEN      |
 | KIM ALLEN       |
 | MERYL ALLEN     |
@@ -183,12 +198,15 @@ WHERE a.last_name ILIKE  'Allen';
 
 - La consulta devuelve los actores cuyos apellidos son exactamente 'Allen', sin importar las mayúsculas o minúsculas.
 - Se obtienen tres resultados únicos.
+
 ---
+
 ## Ejercicio 7
 
 Encuentra la cantidad total de películas en cada clasificación de la tabla "film" y muestra la clasificación junto con el recuento.
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener la clasificación de las películas y contar cuántas hay por cada clasificación.
 - Utilizamos la función de agregación `COUNT()` para contar el número de películas.
 - Agrupamos los resultados por la columna `rating` y ordenamos por el total de películas.
@@ -196,18 +214,18 @@ Encuentra la cantidad total de películas en cada clasificación de la tabla "fi
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 
+SELECT
 		f.rating AS "clasificación",
-		COUNT(f.film_id ) AS "total_peliculas"		
-FROM film AS f 
-GROUP BY rating 
+		COUNT(f.film_id ) AS "total_peliculas"
+FROM film AS f
+GROUP BY rating
 ORDER BY total_peliculas;
 ```
 
 ### 📊 Resultados (fragmento)
 
 | clasificación | total_peliculas |
-|---------------|-----------------|
+| ------------- | --------------- |
 | G             | 178             |
 | PG            | 194             |
 | R             | 195             |
@@ -218,31 +236,34 @@ ORDER BY total_peliculas;
 
 - La consulta muestra la cantidad total de películas por cada clasificación.
 - El número de películas varía según la clasificación, con la categoría 'PG-13' teniendo la mayor cantidad de películas.
+
 ---
+
 ## Ejercicio 8
 
 Encuentra el título de todas las películas que son 'PG-13' o tienen una duración mayor a 3 horas en la tabla "film".
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener el título, clasificación y duración de las películas.
 - Aplicamos la condición de que la duración sea mayor a 180 minutos (3 horas) o que la clasificación sea 'PG-13'.
 
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 
+SELECT
 		f.title AS "película",
 		f.rating AS "clasificación",
 		f.length AS "duración"
-FROM film AS f 
+FROM film AS f
 WHERE length > 180
    OR rating = 'PG-13';
 ```
 
 ### 📊 Resultados (fragmento)
 
-| película                   | clasificación | duración |
-|----------------------------|---------------|----------|
+| película                    | clasificación | duración |
+| --------------------------- | ------------- | -------- |
 | AIRPLANE SIERRA             | PG-13         | 62       |
 | ALABAMA DEVIL               | PG-13         | 114      |
 | ALTER VICTORY               | PG-13         | 57       |
@@ -259,19 +280,22 @@ WHERE length > 180
 
 - La consulta devuelve todas las películas que son 'PG-13' o tienen una duración mayor a 3 horas.
 - Muchos de los resultados son películas de clasificación 'PG-13', y algunas alcanzan o superan las 3 horas de duración.
+
 ---
+
 ## Ejercicio 9
 
 Encuentra la variabilidad de lo que costaría reemplazar las películas.
 
 ### Pasos:
+
 - Consultamos la tabla `film` para calcular la desviación estándar (`STDDEV`) de los costos de reemplazo de las películas (`replacement_cost`).
 - Usamos la función `ROUND` para redondear el resultado a 2 decimales.
 
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 
+SELECT
     ROUND(STDDEV(replacement_cost), 2) AS "Desviación_Estándar"
 FROM film;
 ```
@@ -279,21 +303,24 @@ FROM film;
 ### 📊 Resultado
 
 | Desviación_Estándar |
-|---------------------|
+| ------------------- |
 | 6,05                |
 
 ### ✅ Conclusiones
 
 - La desviación estándar del costo de reemplazo de las películas es de 6,05.
 - Esto indica que los costos de reemplazo de las películas varían en un promedio de 6,05 unidades monetarias respecto a la media.
+
 ---
+
 ## Ejercicio 10
 
 Encuentra la mayor y menor duración de una película en la base de datos.
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener la duración mínima (`MIN`) y máxima (`MAX`) de las películas, utilizando la columna `length`.
-  
+
 ### 📌 Consulta SQL
 
 ```sql
@@ -306,7 +333,7 @@ FROM film AS f;
 ### 📊 Resultado
 
 | duración_mínima | duración_mánima |
-|-----------------|-----------------|
+| --------------- | --------------- |
 | 46              | 185             |
 
 ### ✅ Conclusiones
@@ -315,25 +342,29 @@ FROM film AS f;
 - La duración máxima de una película en la base de datos es de 185 minutos.
 
 ---
-## Ejercicio 11. 
+
+## Ejercicio 11.
+
 Encuentra lo que costó el antepenúltimo alquiler ordenado por día
 
 ### Pasos:
+
 Para obtener el antepenúltimo registro simplemente:
+
 - Ordenamos por `rental_date` en orden descendente (`DESC`).
 - Usamos `OFFSET 2 LIMIT 1` para acceder al tercer elemento (antepenúltimo) en ese orden.
 - Utilizamos un `LEFT JOIN` entre `rental` y `payment` para incluir aquellos alquileres que puedan no tener pago registrado (aunque en este caso probablemente sí lo tengan).
 
-###  Consulta SQL
+### Consulta SQL
 
 ```sql
-SELECT 
+SELECT
     r.rental_id AS "id_alquiler",
     r.rental_date AS "fecha_alquiler",
     p.amount AS "precio_alquiler"
-FROM rental AS r 
-    LEFT JOIN payment AS p 
-        ON r.rental_id = p.rental_id 
+FROM rental AS r
+    LEFT JOIN payment AS p
+        ON r.rental_id = p.rental_id
 ORDER BY r.rental_date DESC
 OFFSET 2
 LIMIT 1;
@@ -341,56 +372,63 @@ LIMIT 1;
 
 ### 📊 Resultado
 
-| id_alquiler | fecha_alquiler         | precio_alquiler |
-|-------------|------------------------|-----------------|
+| id_alquiler | fecha_alquiler          | precio_alquiler |
+| ----------- | ----------------------- | --------------- |
 | 11.676      | 2006-02-14 15:16:03.000 | 0               |
 
 ### ✅ Conclusión
+
 El antepenúltimo alquiler registrado en la base de datos (ordenado por fecha de alquiler descendente) tuvo un **importe de 0**.  
 Esto puede indicar que fue un alquiler gratuito, promocional, o bien que el pago no se registró correctamente. En cualquier caso, es importante notar que hay registros con importe cero y que convendría analizarlos si se estuviera realizando un estudio financiero.
 
 ---
+
 ## Ejercicio 12
 
 Encuentra el título de películas que no sean de clasificación 'NC-17' ni 'G'.
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener los títulos de las películas cuya clasificación no sea 'NC-17' ni 'G'.
 - Usamos la cláusula `NOT IN` para excluir estas clasificaciones.
-  
+
 ### 📌 Consulta SQL
 
 ```sql
 SELECT
     f.title AS "título",
     f.rating AS "clasificación"
-FROM film AS f 
+FROM film AS f
 WHERE f.rating NOT IN ('NC-17','G');
 ```
 
 ### 📊 Resultado
 
-| título                | clasificación |
-|-----------------------|---------------|
-| ACADEMY DINOSAUR      | PG            |
-| AGENT TRUMAN          | PG            |
-| AIRPLANE SIERRA       | PG-13         |
-| AIRPORT POLLOCK       | R             |
-| ALABAMA DEVIL         | PG-13         |
-| ALASKA PHANTOM        | PG            |
-| ALI FOREVER           | PG            |
-| ALONE TRIP            | R             |
-| ALTER VICTORY         | PG-13         |
-| AMADEUS HOLY          | PG            |
+| título           | clasificación |
+| ---------------- | ------------- |
+| ACADEMY DINOSAUR | PG            |
+| AGENT TRUMAN     | PG            |
+| AIRPLANE SIERRA  | PG-13         |
+| AIRPORT POLLOCK  | R             |
+| ALABAMA DEVIL    | PG-13         |
+| ALASKA PHANTOM   | PG            |
+| ALI FOREVER      | PG            |
+| ALONE TRIP       | R             |
+| ALTER VICTORY    | PG-13         |
+| AMADEUS HOLY     | PG            |
 
 ### ✅ Conclusiones
+
 - Se han encontrado varias películas en la base de datos que no pertenecen a las clasificaciones 'NC-17' ni 'G', incluidas clasificaciones como 'PG', 'PG-13' y 'R'.
+
 ---
+
 ## Ejercicio 13
 
 Encuentra el promedio de duración de las películas para cada clasificación de la tabla `film` y muestra la clasificación junto con el promedio de duración.
 
 ### Pasos:
+
 - La consulta se realiza sobre la tabla `film` para calcular el promedio de la duración de las películas, agrupadas por su clasificación.
 - Se utiliza la función de agregación `AVG(f.length)` para calcular el promedio de la duración de las películas en cada clasificación.
 - El resultado se redondea a dos decimales con la función `ROUND()`.
@@ -402,7 +440,7 @@ Encuentra el promedio de duración de las películas para cada clasificación de
 SELECT
     f.rating AS "clasificación",
     ROUND(AVG(f.length),2) AS "promedio-duración"
-FROM film AS f 
+FROM film AS f
 GROUP BY f.rating
 ORDER BY "promedio-duración" DESC;
 ```
@@ -410,7 +448,7 @@ ORDER BY "promedio-duración" DESC;
 ### 📊 Resultado
 
 | clasificación | promedio-duración |
-|---------------|-------------------|
+| ------------- | ----------------- |
 | PG-13         | 120,44            |
 | R             | 118,66            |
 | NC-17         | 113,23            |
@@ -422,53 +460,61 @@ ORDER BY "promedio-duración" DESC;
 - **Películas más largas**: Las clasificaciones **PG-13** (120,44 min) y **R** (118,66 min) tienen las películas más largas, probablemente por su contenido más complejo y maduro.
 - **Películas más cortas**: Las **G** son las más cortas (111,05 min), ya que suelen ser más directas y para un público joven.
 - **Tendencia general**: Las películas dirigidas a audiencias más específicas, como **PG-13** y **R**, tienden a ser más largas, mientras que las de **G** y **PG** son más cortas y sencillas.
+
 ---
+
 ## Ejercicio 14
 
 Encuentra el título de todas las películas que tengan una duración mayor a 180 minutos.
 
 ### Pasos:
+
 - Consultamos la tabla `film` para obtener el título y la duración de las películas.
 - Aplicamos la condición de que la duración sea mayor a 180 minutos.
 
 ### 📌 Consulta SQL
 
 ```sql
-SELECT 
+SELECT
     f.title AS "título",
     f.length AS "duración"
-FROM film AS f 
+FROM film AS f
 WHERE f.length > 180;
 ```
+
 ### 📊 Resultado (parcial)
 
-| título              | duración |
-|---------------------|----------|
-| ANALYZE HOOSIERS    | 181      |
-| BAKED CLEOPATRA     | 182      |
-| CATCH AMISTAD       | 183      |
-| CHICAGO NORTH       | 185      |
-| CONSPIRACY SPIRIT   | 184      |
-| CONTROL ANTHEM      | 185      |
-| CRYSTAL BREAKING    | 184      |
-| DARN FORRESTER      | 185      |
-| FRONTIER CABIN      | 183      |
-| GANGS PRIDE         | 185      |
-| ...                 | ...      |
+| título            | duración |
+| ----------------- | -------- |
+| ANALYZE HOOSIERS  | 181      |
+| BAKED CLEOPATRA   | 182      |
+| CATCH AMISTAD     | 183      |
+| CHICAGO NORTH     | 185      |
+| CONSPIRACY SPIRIT | 184      |
+| CONTROL ANTHEM    | 185      |
+| CRYSTAL BREAKING  | 184      |
+| DARN FORRESTER    | 185      |
+| FRONTIER CABIN    | 183      |
+| GANGS PRIDE       | 185      |
+| ...               | ...      |
 
 ### ✅ Conclusiones
-- **Películas más largas**: 
-	- Las películas con una duración superior a 180 minutos oscilan entre 181 y 185 minutos.
-- **Tendencia general**: 
-	- La mayoría de las películas con duración superior a 180 minutos tienen una duración cercana a los 185 minutos, indicando que estas son más extensas pero no superan las 3 horas.
-- **Variedad en géneros**: 
-	- La duración de estas películas es relativamente uniforme, lo que sugiere que el tiempo no está ligado a un género en particular, sino más bien al tipo de contenido.
+
+- **Películas más largas**:
+  - Las películas con una duración superior a 180 minutos oscilan entre 181 y 185 minutos.
+- **Tendencia general**:
+  - La mayoría de las películas con duración superior a 180 minutos tienen una duración cercana a los 185 minutos, indicando que estas son más extensas pero no superan las 3 horas.
+- **Variedad en géneros**:
+  - La duración de estas películas es relativamente uniforme, lo que sugiere que el tiempo no está ligado a un género en particular, sino más bien al tipo de contenido.
+
 ---
+
 ## Ejercicio 15
 
 ¿Cuánto dinero ha generado en total la empresa?
 
 ### Pasos:
+
 - Consultamos la tabla `payment` para obtener la suma de todas las cantidades pagadas (`amount`).
 - Aplicamos la función `SUM()` para calcular el total de las facturas.
 
@@ -478,20 +524,26 @@ WHERE f.length > 180;
 SELECT SUM(p.amount) AS "total_facturado"
 FROM payment AS p;
 ```
-### 📊 Resultado 
+
+### 📊 Resultado
+
 | total_facturado |
-|-----------------|
+| --------------- |
 | 67416.51        |
 
 ### ✅ Conclusiones
+
 - **Total facturado**: La empresa ha generado un total de **67,416.51** unidades monetarias, lo que refleja las sumas de todas las transacciones de pago registradas en la base de datos.
 - **Implicaciones**: Este valor muestra el ingreso total generado hasta la fecha, lo que puede ser útil para realizar análisis financieros y tomar decisiones estratégicas.
+
 ---
+
 ## Ejercicio 16
 
 Muestra los 10 clientes con mayor valor de ID.
 
 ### Pasos:
+
 - Consultamos la tabla `customer` para obtener el identificador de los clientes (`customer_id`).
 - Ordenamos los resultados en orden descendente para que aparezcan los valores más altos primero.
 - Limitamos la salida a los 10 primeros registros.
@@ -500,13 +552,15 @@ Muestra los 10 clientes con mayor valor de ID.
 
 ```sql
 SELECT c.customer_id AS "cliente"
-FROM customer AS c 
-ORDER BY cliente DESC 
+FROM customer AS c
+ORDER BY cliente DESC
 LIMIT 10;
 ```
-### 📊 Resultado 
+
+### 📊 Resultado
+
 | cliente |
-|---------|
+| ------- |
 | 599     |
 | 598     |
 | 597     |
@@ -519,14 +573,17 @@ LIMIT 10;
 | 590     |
 
 ### ✅ Conclusiones
+
 - **Clientes con ID más alto**: Se han listado los 10 clientes con los IDs más recientes o más altos, lo que puede ser útil para identificar registros nuevos en la base de datos.
 
 ---
+
 ## Ejercicio 17
 
 Encuentra el nombre y apellido de los actores que aparecen en la película con título 'Egg Igby'.
 
 ### Pasos:
+
 - Consultamos la tabla `actor` para obtener los nombres y apellidos.
 - Utilizamos `JOIN` con `film_actor` para relacionar actores con películas.
 - Hacemos otro `JOIN` con `film` para filtrar por el título 'Egg Igby'.
@@ -545,9 +602,11 @@ SELECT
 ---
 
 ```
-### 📊 Resultado 
+
+### 📊 Resultado
+
 | nombre_actor    |
-|-----------------|
+| --------------- |
 | LUCILLE TRACY   |
 | TOM MCKELLEN    |
 | NATALIE HOPKINS |
@@ -555,10 +614,13 @@ SELECT
 | OPRAH KILMER    |
 
 ### ✅ Conclusiones
+
 - **Reparto completo**: La película 'Egg Igby' cuenta con cinco actores.
 - **Variedad de intérpretes**: Se incluyen tanto nombres masculinos como femeninos, lo que sugiere un reparto equilibrado.
 - **Relaciones entre tablas**: Este ejercicio muestra cómo conectar múltiples tablas para obtener información cruzada entre actores y películas.
+
 ---
+
 ## Ejercicio 18
 
 Selecciona todos los nombres de las películas únicos.
@@ -569,41 +631,45 @@ Selecciona todos los nombres de las películas únicos.
 SELECT DISTINCT f.title AS "título"
 FROM film AS f;
 ```
+
 ### 📊 Resultados
 
-| título                |
-|-----------------------|
-| ITALIAN AFRICAN       |
-| FICTION CHRISTMAS     |
-| BADMAN DAWN           |
-| LEGALLY SECRETARY     |
-| PELICAN COMFORTS      |
-| SEARCHERS WAIT        |
-| STALLION SUNDANCE     |
-| FRONTIER CABIN        |
-| TERMINATOR CLUB       |
-| WRONG BEHAVIOR        |
-| ...                   |
+| título            |
+| ----------------- |
+| ITALIAN AFRICAN   |
+| FICTION CHRISTMAS |
+| BADMAN DAWN       |
+| LEGALLY SECRETARY |
+| PELICAN COMFORTS  |
+| SEARCHERS WAIT    |
+| STALLION SUNDANCE |
+| FRONTIER CABIN    |
+| TERMINATOR CLUB   |
+| WRONG BEHAVIOR    |
+| ...               |
 
 ### ✅ Conclusiones
-- **Cantidad de títulos**: 
-	-Se han recuperado 1000 títulos únicos, lo que permite verificar la diversidad del catálogo.
-- **Uso de DISTINCT**: 
-	-Es útil para eliminar duplicados cuando se busca solo una instancia por valor.
+
+- **Cantidad de títulos**:
+  -Se han recuperado 1000 títulos únicos, lo que permite verificar la diversidad del catálogo.
+- **Uso de DISTINCT**:
+  -Es útil para eliminar duplicados cuando se busca solo una instancia por valor.
+
 ---
+
 ## Ejercicio 19
 
 Encuentra el título de las películas que son comedias y tienen una duración mayor a 180 minutos en la tabla "film".
 
 ```sql
-SELECT 
+SELECT
     f.title AS "título",
     c.name AS "categoría",
     f.length  AS "duración"
-FROM category AS c  
-    LEFT JOIN film_category AS fc 
+FROM category AS c
+    LEFT JOIN film_category AS fc
         ON c.category_id = fc.category_id
-    LEFT JOIN film AS f 
+    LEFT JOIN film AS f
         ON fc.film_id = f.film_id
 WHERE f.length > 180
 AND c.name = 'Comedy';
@@ -612,7 +678,7 @@ AND c.name = 'Comedy';
 ### Resultados
 
 | título         | categoría | duración |
-|----------------|-----------|----------|
+| -------------- | --------- | -------- |
 | CONTROL ANTHEM | Comedy    | 185      |
 | SATURN NAME    | Comedy    | 182      |
 | SEARCHERS WAIT | Comedy    | 182      |
@@ -624,6 +690,7 @@ AND c.name = 'Comedy';
 - **Tendencia atípica**: Este resultado sugiere que las comedias largas son una excepción dentro del catálogo.
 
 ---
+
 ## Ejercicio 20
 
 Encuentra las categorías de películas que tienen un promedio de duración superior a 110 minutos. Muestra el nombre de la categoría junto con el promedio de duración.
@@ -639,13 +706,13 @@ Encuentra las categorías de películas que tienen un promedio de duración supe
 7. Se ordenan los resultados por duración promedio de forma ascendente.
 
 ```sql
-SELECT 
+SELECT
     c.name AS "categoría",
     ROUND(AVG(f.length), 2) AS "promedio_duración"
-FROM category AS c  
-    LEFT JOIN film_category AS fc 
+FROM category AS c
+    LEFT JOIN film_category AS fc
         ON c.category_id = fc.category_id
-    LEFT JOIN film AS f 
+    LEFT JOIN film AS f
         ON fc.film_id = f.film_id
 GROUP BY c."name"
 HAVING ROUND(AVG(f.length), 2) > 110
@@ -655,7 +722,7 @@ ORDER BY "promedio_duración";
 ### Resultados
 
 | categoría | promedio_duración |
-|-----------|-------------------|
+| --------- | ----------------- |
 | Animation | 111,02            |
 | New       | 111,13            |
 | Action    | 111,61            |
@@ -673,10 +740,11 @@ ORDER BY "promedio_duración";
 ### Conclusiones
 
 - **Total de categorías con media superior a 110 min**: 13 categorías.
-- **Categorías destacadas**: *Sports* y *Games* presentan las mayores duraciones promedio.
+- **Categorías destacadas**: _Sports_ y _Games_ presentan las mayores duraciones promedio.
 - **Observación general**: Las categorías con mayor carga temática o narrativa parecen requerir más tiempo de desarrollo.
 
 ---
+
 ## Ejercicio 21
 
 ¿Cuál es el promedio de duración del alquiler de las películas?
@@ -695,7 +763,7 @@ FROM film AS f;
 ### Resultados
 
 | duracion_alquiler_promedio |
-|----------------------------|
+| -------------------------- |
 | 4,99                       |
 
 ### Conclusiones
@@ -717,14 +785,14 @@ Crea una columna con el nombre y apellidos de todos los actores y actrices.
 
 ```sql
 SELECT CONCAT(a.first_name, ' ', a.last_name ) AS "nombre_completo_actor"
-FROM actor AS a 
+FROM actor AS a
 ORDER BY nombre_completo_actor;
 ```
 
 ### Resultados (Fragmento parcial)
 
 | nombre_completo_actor |
-|-----------------------|
+| --------------------- |
 | ADAM GRANT            |
 | ADAM HOPPER           |
 | AL GARLAND            |
@@ -738,512 +806,2192 @@ ORDER BY nombre_completo_actor;
 | ...                   |
 | ZERO CAGE             |
 
-
-
 ### Conclusiones
 
-- **Total de actores/actrices listados**: 
-	- El número total de actores y actrices que aparecen en la tabla es de **200**.
-- **Información**: 
-	- Los nombres completos se ordenan alfabéticamente, lo que facilita la búsqueda y el análisis de los datos relacionados con los actores en el sistema.
----
-
+- **Total de actores/actrices listados**:
+  - El número total de actores y actrices que aparecen en la tabla es de **200**.
+- **Información**:
+  - Los nombres completos se ordenan alfabéticamente, lo que facilita la búsqueda y el análisis de los datos relacionados con los actores en el sistema.
 
 ---
 
+## Ejercicio 23
+
+Consulta el número de alquileres realizados por día, ordenados de mayor a menor cantidad.
+
+### SQL Utilizado
+
+```sql
+SELECT
+    r.rental_date::date AS "fecha",
+    COUNT(r.rental_id) AS "alquileres"
+FROM rental AS r
+GROUP BY r.rental_date::date
+ORDER BY alquileres DESC;
+```
+
+### Pasos realizados
+
+1. Se selecciona la fecha del alquiler, extrayendo solo la parte de la fecha (`rental_date::date`).
+2. Se cuentan los alquileres por día utilizando `COUNT(r.rental_id)`.
+3. Se agrupa la información por fecha (`GROUP BY`).
+4. Se ordenan los resultados de mayor a menor número de alquileres (`ORDER BY alquileres DESC`).
+
+### Resultado
+
+Los días con más alquileres fueron:
+
+| fecha      | alquileres |
+| ---------- | ---------- |
+| 2005-07-31 | 679        |
+| 2005-08-01 | 671        |
+| 2005-08-21 | 659        |
+| 2005-07-27 | 649        |
+| 2005-08-02 | 643        |
+
+Y los días con menos actividad:
+
+| fecha      | alquileres |
+| ---------- | ---------- |
+| 2005-05-24 | 8          |
+| 2005-06-14 | 16         |
+| 2005-08-16 | 23         |
+
+### Conclusión
+
+- Se observa que los días con mayor volumen de alquileres se concentran entre finales de julio y principios de agosto de 2005, lo que podría estar relacionado con una mayor demanda estacional (verano).
+- Por el contrario, los días con menor actividad corresponden a finales de mayo y mediados de junio, lo cual puede estar vinculado a una etapa inicial de operaciones o menor afluencia de clientes en esas fechas.
 
 ---
 
+## Ejercicio 24
+
+Encuentra las películas con una duración superior a la duración promedio.
+
+### SQL Utilizado
+
+```sql
+-- 24. Encuentra las películas con una duración superior al promedio
+
+SELECT
+    f.title AS "película",
+    f.length AS "duraciòn"
+FROM film AS f
+WHERE f.length > (
+    SELECT AVG(f2.length)
+    FROM film AS f2
+);
+```
+
+### Pasos realizados
+
+1. Se seleccionan el título y la duración de cada película desde la tabla `film`.
+2. Se utiliza una subconsulta para calcular la duración promedio de todas las películas: `SELECT AVG(length) FROM film`.
+3. Se filtran aquellas películas cuya duración es superior al promedio (`WHERE f.length > (...)`).
+
+### Resultado
+
+La consulta devuelve un listado de películas cuya duración es superior a la media. Algunos ejemplos:
+
+| película         | duración |
+| ---------------- | -------- |
+| AFFAIR PREJUDICE | 117      |
+| AFRICAN EGG      | 130      |
+| AGENT TRUMAN     | 169      |
+| ALLEY EVOLUTION  | 180      |
+| ANALYZE HOOSIERS | 181      |
+| ...              | ...      |
+| GANGS PRIDE      | 185      |
+| HOME PITY        | 185      |
+
+> ⚠️ La duración promedio no se muestra directamente en esta consulta, pero puedes obtenerla aparte si lo consideras útil para incluir en la documentación.
+
+### Conclusión
+
+Este análisis permite identificar las películas más largas del catálogo de Sakila. El hecho de que muchas superen los 150 minutos sugiere que existe una buena cantidad de películas de larga duración. Estas pueden interesar a públicos específicos, por ejemplo, aficionados al cine épico o narrativas más desarrolladas.
+
+Además, este tipo de consultas resulta útil para segmentar el catálogo según criterios de duración, lo cual puede alimentar análisis posteriores relacionados con preferencias de los clientes, tendencias de alquiler, o necesidades de almacenamiento y reproducción.
+
+## Ejercicio 24
+
+Encuentra las películas con una duración superior a la duración promedio.
+
+### SQL Utilizado
+
+```sql
+SELECT
+    f.title AS "película",
+    f.length AS "duraciòn"
+FROM film AS f
+WHERE f.length > (
+    SELECT AVG(f2.length)
+    FROM film AS f2
+);
+```
+
+### Pasos realizados
+
+1. Se seleccionan el título y la duración de cada película desde la tabla `film`.
+2. Se utiliza una subconsulta para calcular la duración promedio de todas las películas: `SELECT AVG(length) FROM film`.
+3. Se filtran aquellas películas cuya duración es superior al promedio (`WHERE f.length > (...)`).
+
+### Resultado
+
+La consulta devuelve un listado de películas cuya duración es superior a la media (avg 115,272). Algunos ejemplos:
+
+| película         | duración |
+| ---------------- | -------- |
+| AFFAIR PREJUDICE | 117      |
+| AFRICAN EGG      | 130      |
+| AGENT TRUMAN     | 169      |
+| ALLEY EVOLUTION  | 180      |
+| ANALYZE HOOSIERS | 181      |
+| ...              | ...      |
+| GANGS PRIDE      | 185      |
+| HOME PITY        | 185      |
+
+### Conclusión
+
+Este análisis permite identificar las películas más largas del catálogo de Sakila. El hecho de que muchas superen los 150 minutos sugiere que existe una buena cantidad de películas de larga duración. Estas pueden interesar a públicos específicos, por ejemplo, aficionados al cine épico o narrativas más desarrolladas.
+
+Además, este tipo de consultas resulta útil para segmentar el catálogo según criterios de duración, lo cual puede alimentar análisis posteriores relacionados con preferencias de los clientes, tendencias de alquiler, o necesidades de almacenamiento y reproducción.
 
 ---
-#### **Ejercicio 36: Cuenta cuántos actores hay en la tabla "actor".**
-**Objetivo:** El ejercicio tiene como objetivo contar la cantidad total de actores en la tabla `actor`. Este dato puede ser útil para comprender el tamaño de la base de datos de actores.
 
-**Consulta SQL utilizada:**
+## Ejercicio 25
+
+Averigua el número de alquileres registrados por mes.
+
+### SQL Utilizado
+
+```sql
+SELECT
+    EXTRACT(MONTH FROM r.rental_date) AS "mes",
+    COUNT(r.rental_id) AS "número de alquileres"
+FROM rental AS r
+GROUP BY EXTRACT(MONTH FROM rental_date)
+ORDER BY mes;
+```
+
+### Pasos realizados
+
+1. Se utiliza `EXTRACT(MONTH FROM rental_date)` para extraer el número del mes de cada fecha de alquiler.
+2. Se agrupa por mes para contar cuántos alquileres (`rental_id`) se realizaron en cada uno.
+3. Se ordenan los resultados de forma ascendente por mes para una visualización cronológica.
+
+### Resultado
+
+| mes | número de alquileres |
+| --- | -------------------- |
+| 2   | 182                  |
+| 5   | 1.156                |
+| 6   | 2.311                |
+| 7   | 6.709                |
+| 8   | 5.686                |
+
+### Conclusión
+
+El análisis revela que los meses con mayor actividad de alquiler fueron **julio** y **agosto**, lo que podría estar relacionado con un aumento del consumo de entretenimiento durante las vacaciones de verano. Por el contrario, febrero presenta el número más bajo, posiblemente por ser un mes más corto y fuera de temporada.
+
+Este tipo de consulta es útil para:
+
+- Identificar patrones estacionales en la demanda.
+- Planificar campañas de marketing en los meses de mayor volumen.
+- Optimizar inventario y recursos durante los picos de actividad.
+
+---
+
+## Ejercicio 26
+
+Encuentra el promedio, la desviación estándar y varianza del total pagado.
+
+### SQL Utilizado
+
+```sql
+SELECT
+    ROUND(AVG(p.amount), 2) AS "promedio",
+    ROUND(STDDEV(p.amount), 2) AS "desviación_estandar",
+    ROUND(VARIANCE(p.amount), 2) AS "varianza"
+FROM payment AS p;
+```
+
+### Pasos realizados
+
+1. Se emplean funciones estadísticas sobre la columna `amount` de la tabla `payment`:
+   - `AVG()` para el promedio.
+   - `STDDEV()` para la desviación estándar.
+   - `VARIANCE()` para la varianza.
+2. Se usa `ROUND(..., 2)` para redondear los resultados a dos decimales, facilitando la interpretación.
+
+### Resultado
+
+| promedio | desviación_estandar | varianza |
+| -------- | ------------------- | -------- |
+| 4,20     | 2,36                | 5,58     |
+
+### Conclusión
+
+Los pagos en la base de datos presentan un promedio de **4,20 unidades monetarias**, con una **desviación estándar de 2,36**, lo cual indica que los pagos varían moderadamente respecto al promedio. La **varianza de 5,58** refuerza esta dispersión.
+
+Estas métricas son útiles para:
+
+- Evaluar la consistencia en los importes pagados.
+- Analizar si existen pagos atípicos o desviaciones significativas.
+- Servir de base para establecer límites o segmentaciones de clientes según hábitos de pago.
+
+---
+
+## Ejercicio 27
+
+¿Qué películas se alquilan por encima del precio medio?
+
+### SQL Utilizado
+
+```sql
+SELECT
+    f.title AS "película",
+    f.rental_rate AS "precio"
+FROM film AS f
+WHERE f.rental_rate > (
+    SELECT AVG(f2.rental_rate)
+    FROM film AS f2
+);
+```
+
+### Pasos realizados
+
+1. Se calcula el precio medio de alquiler usando una subconsulta con `AVG(f2.rental_rate)` sobre toda la tabla `film`, que da como resultado 2.98.
+2. En la consulta principal, se seleccionan las películas cuya tarifa (`rental_rate`) es superior al promedio obtenido.
+3. Se proyectan las columnas `title` y `rental_rate` para visualizar el nombre de la película y su precio.
+
+### Resultado
+
+Se devuelve una lista de películas con un precio de alquiler superior al promedio. Dado que hay muchas, solo se muestra un extracto:
+
+| película            | precio |
+| ------------------- | ------ |
+| ACE GOLDFINGER      | 4,99   |
+| AIRPLANE SIERRA     | 4,99   |
+| AMELIE HELLFIGHTERS | 4,99   |
+| ...                 | ...    |
+
+### Conclusión
+
+Esta consulta permite identificar películas con tarifas superiores al promedio, lo cual puede tener múltiples aplicaciones:
+
+- Detectar títulos **premium** para análisis de rentabilidad.
+- Comparar con su demanda o frecuencia de alquiler.
+- Tomar decisiones de marketing o promociones sobre títulos por encima del promedio.
+
+---
+
+## Ejercicio 28
+
+Muestra el ID de los actores que hayan participado en más de 40 películas.
+
+### SQL Utilizado
+
+```sql
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS "nombre_completo",
+    COUNT(fa.film_id) AS "número_películas",
+    fa.actor_id AS "id_actor"
+FROM film_actor AS fa
+LEFT JOIN actor AS a ON fa.actor_id = a.actor_id
+GROUP BY a.first_name, a.last_name, fa.actor_id
+HAVING COUNT(fa.film_id) > 40
+ORDER BY número_películas DESC;
+```
+
+### Pasos realizados
+
+1. Se relacionan las tablas `film_actor` y `actor` para obtener los nombres de los actores.
+2. Se agrupa por nombre y `actor_id` para contar cuántas películas ha hecho cada actor.
+3. Se aplica la cláusula `HAVING` para filtrar solo aquellos que han participado en más de 40 películas.
+4. Se ordena el resultado de forma descendente para mostrar primero los actores más prolíficos.
+
+### Resultado
+
+| nombre_completo | número_películas | id_actor |
+| --------------- | ---------------- | -------- |
+| GINA DEGENERES  | 42               | 107      |
+| WALTER TORN     | 41               | 102      |
+
+### Conclusión
+
+El análisis permite identificar a los actores más recurrentes en el catálogo de la base de datos. Esto puede ser útil para:
+
+- Estudios de popularidad y carga de trabajo actoral.
+- Selección de actores para promociones o productos relacionados.
+- Cruces con el rendimiento comercial de las películas en las que participan.
+
+---
+
+## Ejercicio 29
+
+Obtener todas las películas y, si están disponibles en el inventario, mostrar la cantidad disponible.
+
+### SQL Utilizado
+
+```sql
+SELECT
+    f.title AS "película",
+    COUNT(i.film_id) AS "cantidad_inventario"
+FROM film AS f
+LEFT JOIN inventory AS i ON f.film_id = i.film_id
+GROUP BY f.title
+ORDER BY cantidad_inventario DESC;
+```
+
+### Pasos realizados
+
+1. Se hace un `LEFT JOIN` entre las tablas `film` e `inventory` utilizando el `film_id` como clave de unión para obtener las películas y las cantidades disponibles en el inventario.
+2. Se cuenta la cantidad de cada película en el inventario usando `COUNT(i.film_id)` para contar las filas correspondientes en la tabla `inventory`.
+3. Se agrupan los resultados por título de la película (`f.title`).
+4. Se ordena el resultado de mayor a menor cantidad disponible en el inventario.
+
+### Resultado
+
+| película              | cantidad_inventario |
+| --------------------- | ------------------- |
+| MOCKINGBIRD HOLLYWOOD | 8                   |
+| ZORRO ARK             | 8                   |
+| SPY MILE              | 8                   |
+| LOSE INCH             | 8                   |
+| TITANS JERK           | 8                   |
+| ...                   | ...                 |
+
+### Conclusión
+
+- **Películas con mayor inventario**: La mayoría de las películas tienen **8 unidades disponibles** en el inventario, como se observa en las primeras filas del resultado, con títulos como "MOCKINGBIRD HOLLYWOOD", "ZORRO ARK", y "SPY MILE".
+- **Películas con menor inventario**: Algunas películas como "HIGHBALL POTTER" y "ALIEN CENTER" solo tienen **6 unidades disponibles**, lo que podría indicar que son menos populares o tienen un inventario limitado.
+
+- **Tendencia en el inventario**: La mayoría de las películas disponibles en el inventario parecen estar en grupos de 8 unidades, lo que podría ser el valor estándar de existencias asignadas a cada película en la tienda. Esto sugiere una posible política de inventario uniformemente distribuida, a menos que haya una demanda especial para ciertos títulos.
+
+---
+
+## Ejercicio 30
+
+Obtener los actores y el número de películas en las que han actuado.
+
+### SQL Utilizado
+
+```sql
+SELECT
+		CONCAT(a.first_name, ' ', a.last_name) AS "nombre_completo",
+		COUNT(fa.film_id ) AS "número_películas"
+FROM film_actor AS fa
+	LEFT JOIN actor AS a
+	ON fa.actor_id  = a.actor_id
+GROUP BY a.first_name, a.last_name
+ORDER BY número_películas DESC ;
+```
+
+### Pasos realizados
+
+1. Se hace un `LEFT JOIN` entre las tablas `film_actor` y `actor` utilizando `actor_id` para combinar los registros.
+2. Se concatena el primer y último nombre del actor para obtener el nombre completo.
+3. Se cuenta la cantidad de películas en las que ha actuado cada actor usando `COUNT(fa.film_id)`.
+4. Se agrupan los resultados por nombre del actor y se ordenan por el número de películas en orden descendente.
+
+### Resultado
+
+| nombre_completo | número_películas |
+| --------------- | ---------------- |
+| SUSAN DAVIS     | 54               |
+| GINA DEGENERES  | 42               |
+| WALTER TORN     | 41               |
+| MARY KEITEL     | 40               |
+| MATTHEW CARREY  | 39               |
+| SANDRA KILMER   | 37               |
+| SCARLETT DAMON  | 36               |
+| VIVIEN BASINGER | 35               |
+| VAL BOLGER      | 35               |
+| ... (continúa)  | ...              |
+
+### Conclusión
+
+- **Actores más prolíficos**: **SUSAN DAVIS** es quien ha participado en más películas, con un total de **54**. Esto sugiere que es uno de los actores más activos en la base de datos y podría tener una carrera exitosa en la industria.
+- **Otros actores destacados**: Los actores con una gran cantidad de películas incluyen **GINA DEGENERES** (42), **WALTER TORN** (41), y **MARY KEITEL** (40), lo que refleja que estos actores son también bastante prolíficos en términos de su participación en películas.
+- **Tendencias en la industria**: La mayoría de los actores parecen haber trabajado en un rango de **30 a 40** películas, lo que indica que hay una cierta cantidad de actores que tienen una carrera más estable y consistente en la industria.
+
+- **Actores con menos películas**: A medida que el número de películas disminuye, algunos actores como **JULIA FAWCETT** (15) o **EMILY DEE** (14) muestran una participación en menos títulos. Esto podría indicar una carrera más corta o más especializada en ciertos tipos de películas.
+
+---
+
+## Ejercicio 31:
+
+Obtener todas las películas y mostrar los actores que han actuado en ellas, incluso si algunas películas no tienen actores asociados
+
+### Consulta SQL
+
+```sql
+SELECT
+    f.title AS "película",
+    CONCAT(a.first_name, ' ', a.last_name) AS "nombre_actor"
+FROM film AS f
+    LEFT JOIN film_actor AS fa
+        ON f.film_id = fa.film_id
+    LEFT JOIN actor AS a
+        ON fa.actor_id = a.actor_id
+ORDER BY f.title;
+```
+
+### Pasos realizados
+
+1.Se selecciona la tabla `film`, que contiene los datos de las películas.
+
+2. Se realiza un `LEFT JOIN` con la tabla `film_actor`, que asocia actores con películas. Esto se hace para incluir todas las películas, incluso aquellas que no tienen actores asignados.
+
+   - Usar LEFT JOIN asegura que incluso las películas sin actores se incluyan en el resultado.
+
+3. Se hace un LEFT JOIN adicional con la tabla `actor` para obtener los nombres de los actores que participan en las películas.
+
+4. Se concatena el nombre y apellido del actor para obtener el nombre completo en una sola columna llamada `nombre_actor`.
+
+5. Se ordenan los resultados por el título de la película en orden alfabético para facilitar la lectura y organización de los resultados.
+
+### Resultado:
+
+| película         | nombre_actor     |
+| ---------------- | ---------------- |
+| ACADEMY DINOSAUR | PENELOPE GUINESS |
+| ACADEMY DINOSAUR | SANDRA PECK      |
+| ACADEMY DINOSAUR | WARREN NOLTE     |
+| ACADEMY DINOSAUR | MARY KEITEL      |
+| ACADEMY DINOSAUR | JOHNNY CAGE      |
+| ACADEMY DINOSAUR | ROCK DUKAKIS     |
+| ACADEMY DINOSAUR | MENA TEMPLE      |
+| ACADEMY DINOSAUR | OPRAH KILMER     |
+| ACADEMY DINOSAUR | CHRISTIAN GABLE  |
+| ACADEMY DINOSAUR | LUCILLE TRACY    |
+| ACE GOLDFINGER   | CHRIS DEPP       |
+
+### Conclusiones:
+
+1. Películas sin actores: Las películas que no tienen actores asociados aparecerán con el campo `nombre_actor` como `NULL`. Esto garantiza que la consulta devuelva todas las películas, independientemente de si tienen actores o no.
+
+2. El uso del `LEFT JOIN` es esencial para garantizar que se muestren todas las películas, incluso aquellas sin actores. Si se hubiera usado un `INNER JOIN`, solo se habrían mostrado las películas con actores asociados.
+
+3. Ordenación alfabética: El uso de `ORDER BY f.title` asegura que las películas se presenten en orden alfabético por su título, facilitando la búsqueda y la organización de los datos.
+
+---
+
+## Ejercicio 32:
+
+Obtener todos los actores y mostrar las películas en las que han actuado, incluso si algunos actores no han actuado en ninguna película
+
+### Consulta SQL
+
+```sql
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS "nombre_actor",
+    f.title AS "película"
+FROM actor AS a
+    LEFT JOIN film_actor AS fa
+        ON a.actor_id = fa.actor_id
+    LEFT JOIN film AS f
+        ON fa.film_id = f.film_id;
+```
+
+### Pasos realizados:
+
+1. Se selecciona la tabla `actor`, que contiene los datos de los actores.
+
+2. Se realiza un `LEFT JOIN` con la tabla `film_actor`, que asocia actores con películas. Esto se hace para incluir todos los actores, incluso aquellos que no tienen películas asociadas. Usar `LEFT JOIN` asegura que todos los actores aparezcan en el resultado.
+
+3. Se hace un `LEFT JOIN` con la tabla film, que contiene los datos de las películas, se utiliza para obtener los títulos de las películas en las que los actores han participado. Si un actor no ha participado en ninguna película, la columna `película` será `NULL`.
+
+4. Se concatena el primer nombre y el apellido del actor para obtener el nombre completo del actor en una sola columna llamada `nombre_actor`.
+
+5. La consulta ordena los resultados por el apellido del actor y, en caso de empate, por el primer nombre. Esto facilita la búsqueda y visualización de los actores en orden alfabético.
+
+### Resultados:
+
+| nombre_actor     | película              |
+| ---------------- | --------------------- |
+| PENELOPE GUINESS | ACADEMY DINOSAUR      |
+| PENELOPE GUINESS | ANACONDA CONFESSIONS  |
+| PENELOPE GUINESS | ANGELS LIFE           |
+| PENELOPE GUINESS | BULWORTH COMMANDMENTS |
+| ...              | ...                   |
+| JOE SWANK        | PERDITION FARGO       |
+
+### Conclusiones:
+
+**Actores sin películas:** En los resultados se puede observar que algunos actores no están asociados con ninguna película.
+
+**Posibles datos faltantes:** La consulta muestra que algunos actores podrían tener datos incompletos, ya sea porque no han sido asignados a ninguna película o por posibles errores en el proceso de asociación entre actores y películas. Esto podría ser relevante en casos de análisis de calidad de los datos o cuando se realicen depuraciones de la base de datos.
+
+**Diversidad de participación:** En el caso de los actores que sí han trabajado en películas, se observa una gran variedad en los títulos en los que han participado, lo que refleja la amplitud de su carrera dentro de la base de datos de películas.
+
+---
+
+# Ejercicio 33:
+
+Obtener todas las películas y los registros de alquiler
+
+## Consulta SQL
+
+```sql
+SELECT
+    f.title AS "película",
+    r.rental_id AS "id_alquiler",
+    r.rental_date AS "fecha_alquiler"
+FROM film AS f
+LEFT JOIN inventory AS i
+    ON f.film_id = i.film_id
+LEFT JOIN rental AS r
+    ON i.inventory_id = r.inventory_id
+GROUP BY f.title, r.rental_id
+ORDER BY f.title;
+```
+
+### Pasos realizados:
+
+1. La consulta utiliza las tablas `film`, `inventory` y `rental` para obtener la información necesaria.
+
+- Selección de columnas:
+
+  - `f.title`: Obtiene el título de la película desde la tabla film.
+  - `r.rental_id`: Obtiene el ID del alquiler desde la tabla rental.
+  - `r.rental_date`: Obtiene la fecha del alquiler desde la tabla rental.
+
+2. Se realiza un `LEFT JOIN` entre la tabla `film` y la tabla `inventory`, utilizando `film_id` para relacionarlas. Esto asegura que se muestren todas las películas, incluso aquellas que no tengan registros de alquiler.
+
+3. Se realiza un `LEFT JOIN` entre la tabla `inventory` y la tabla `rental`, utilizando `inventory_id` para relacionarlas, asegurando que se muestren los alquileres de cada película.
+
+4. Se agrupan los resultados por `título de película` y `ID de alquiler` para que no se repitan registros.
+
+5. Se ordenan los resultados alfabéticamente por `título de película`
+
+### Resultados:
+
+| película         | id_alquiler | fecha_alquiler          |
+| ---------------- | ----------- | ----------------------- |
+| ACADEMY DINOSAUR | 361         | 2005-05-27 07:03:28.000 |
+| ACADEMY DINOSAUR | 972         | 2005-05-30 20:21:07.000 |
+| ACADEMY DINOSAUR | 1210        | 2005-06-15 02:57:51.000 |
+| ACADEMY DINOSAUR | 2117        | 2005-06-17 20:24:00.000 |
+| ACADEMY DINOSAUR | 3201        | 2005-06-21 00:30:26.000 |
+| ACADEMY DINOSAUR | 4187        | 2005-07-07 10:41:31.000 |
+| ACADEMY DINOSAUR | 4390        | 2005-07-07 20:59:06.000 |
+| ACADEMY DINOSAUR | 4863        | 2005-07-08 19:03:15.000 |
+| ACADEMY DINOSAUR | 5766        | 2005-07-10 13:07:31.000 |
+| ACADEMY DINOSAUR | 7168        | 2005-07-27 07:51:11.000 |
+| ACADEMY DINOSAUR | 8510        | 2005-07-29 09:41:38.000 |
+| ACADEMY DINOSAUR | 9449        | 2005-07-30 22:02:34.000 |
+| ACADEMY DINOSAUR | 10126       | 2005-07-31 21:36:07.000 |
+| ...              | ...         | ...                     |
+
+### Conclusiones:
+
+Se obtiene una visión completa del inventario de películas y sus registros de alquiler
+
+---
+
+# Ejercicio 34:
+
+Encontrar los 5 clientes que más dinero se han gastado
+
+## Consulta SQL
+
+```sql
+SELECT
+    p.customer_id AS "id_cliente",
+    CONCAT(c.first_name, ' ', c.last_name) AS "nombre_cliente",
+    SUM(p.amount) AS "total_gastado"
+FROM payment AS p
+LEFT JOIN customer AS c
+    ON p.customer_id = c.customer_id
+GROUP BY p.customer_id, c.first_name, c.last_name
+ORDER BY total_gastado DESC
+LIMIT 5;
+```
+
+### Pasos realizados:
+
+1. Desde la tabla `payment` ,selección de columnas:
+
+   - `p.customer_id`: ID del cliente que realizó el pago.
+   - `CONCAT(c.first_name, ' ', c.last_name)`: Nombre completo del cliente.
+   - `SUM(p.amount)`: Suma total de los pagos realizados por cada cliente.
+
+2. Se realiza un `LEFT JOIN` entre la tabla `payment` y la tabla `customer`, utilizando `customer_id` para relacionarlas,asegurando que se relaciona cada pago con la información del cliente correspondiente.
+
+3. Se agrupan los pagos por cliente para calcular la suma total por cada uno.
+   `GROUP BY p.customer_id, c.first_name, c.last_name`
+4. Se ordenan los resultados por el total gastado en orden descendente.
+   `ORDER BY total_gastado DESC`
+5. Se limita el resultado a los 5 clientes que más han gastado `LIMIT 5`
+
+### Resultados:
+
+| id_cliente | nombre_cliente | total_gastado |
+| ---------- | -------------- | ------------- |
+| 526        | KARL SEAL      | 221.55        |
+| 148        | ELEANOR HUNT   | 216.54        |
+| 144        | CLARA SHAW     | 195.58        |
+| 137        | RHONDA KENNEDY | 194.61        |
+| 178        | MARION SNYDER  | 194.61        |
+
+### Resultados:
+
+Los 5 clientes con mayor gasto han realizado pagos por encima de los **190 dólares**.
+
+Esta información puede ser útil para estrategias de fidelización y campañas personalizadas orientadas a clientes de alto valor.
+
+---
+
+# Ejercicio 35:
+
+Seleccionar todos los actores cuyo primer nombre es 'Johnny'
+
+## Consulta SQL
+
+```sql
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS "nombre_actor"
+FROM actor AS a
+WHERE a.first_name ILIKE 'Johnny';
+```
+
+### Pasos realizados:
+
+1. Selección de columnas: Se combina el nombre y el apellido del actor para mostrar su nombre completo
+
+   - `CONCAT(a.first_name, ' ', a.last_name)`
+
+2. Se filtran los resultados para incluir solo aquellos actores cuyo first_name es 'Johnny'
+   - `WHERE a.first_name ILIKE 'Johnny'`
+   - Se utiliza ILIKE en lugar de LIKE para que la comparación no sea sensible a mayúsculas o minúsculas.
+
+### Resultados:
+
+| nombre_actor        |
+| ------------------- |
+| JOHNNY LOLLOBRIGIDA |
+| JOHNNY CAGE         |
+
+---
+
+# Ejercicio 36:
+
+Renombrar columnas "first_name" como Nombre y "last_name" como Apellido
+
+## Consulta SQL
+
+```sql
+SELECT
+    a.first_name AS "Nombre",
+    a.last_name AS "Apellido"
+FROM actor AS a;
+```
+
+### Pasos realizados:
+
+1. Selección de columnas:
+   - `a.first_name AS "Nombre"`: Renombra la columna first_name como "Nombre".
+   - `a.last_name AS "Apellido"`: Renombra la columna last_name como "Apellido".
+2. Origen de los datos:
+   - `FROM actor AS a`: Se obtiene la información de la tabla actor, referenciada con el alias a.
+
+### Resultados:
+
+| Nombre    | Apellido     |
+| --------- | ------------ |
+| PENELOPE  | GUINESS      |
+| NICK      | WAHLBERG     |
+| ED        | CHASE        |
+| JENNIFER  | DAVIS        |
+| JOHNNY    | LOLLOBRIGIDA |
+| BETTE     | NICHOLSON    |
+| GRACE     | MOSTEL       |
+| MATTHEW   | JOHANSSON    |
+| JOE       | SWANK        |
+| CHRISTIAN | GABLE        |
+| ...       | ...          |
+
+### Conclusiones:
+
+El renombramiento de columnas en las consultas SQL es una buena práctica para mejorar la presentación de los resultados, sobre todo si van a ser mostrados en informes o dashboards.
+
+Este tipo de transformación no afecta a la estructura de la tabla original, únicamente modifica el alias con el que se muestran los datos.
+
+Es especialmente útil al integrar resultados en herramientas como Power BI o Excel donde una buena nomenclatura facilita la interpretación.
+
+---
+
+# Ejercicio 37:
+
+Encontrar el ID del actor más bajo y del actor más alto en la tabla `actor`
+
+## Consulta SQL
+
+```sql
+SELECT
+    MIN(a.actor_id) AS "min",
+    MAX(a.actor_id) AS "max"
+FROM actor AS a;
+```
+
+### Pasos realizados:
+
+1. Selección de columnas con funciones de agregación:
+
+   - `MIN(a.actor_id)`: Devuelve el valor mínimo del campo actor_id
+   - `MAX(a.actor_id)`: Devuelve el valor máximo del campo actor_id
+
+2. Origen de los datos:
+   - `FROM actor AS a`: Se utiliza la tabla actor con el alias a.
+
+### Resultados:
+
+| min | max |
+| --- | --- |
+| 1   | 200 |
+
+### Conclusiones:
+
+La tabla actor contiene actores con IDs que van del 1 al 200
+
+Esta técnica (funciones MIN y MAX) puede aplicarse en otras tablas para validar identificadores u otros valores numéricos, como fechas o importes de venta.
+
+---
+
+# Ejercicio 38:
+
+Contar cuántos actores hay en la tabla `actor`
+
+## Consulta SQL
+
 ```sql
 SELECT COUNT(a.actor_id) AS "total_actores"
 FROM actor AS a;
 ```
 
-**Explicación:**
-- `COUNT()` se utiliza para contar la cantidad de registros en la columna `actor_id` de la tabla `actor`, proporcionando el número total de actores.
+### Pasos realizados:
+
+1. Selección de columnas con funciones de agregación:
+   - `COUNT(a.actor_id)`: Cuenta el número de valores no nulos en la columna `actor_id`.
+   - Dado que `actor_id` es clave primaria, no contiene valores nulos, por lo que esta función devuelve el total de filas.
+2. Origen de los datos:
+   - `FROM actor AS a`: Se consulta la tabla `actor`, usando el alias `a`.
+
+### Resultados:
+
+| total_actores |
+| ------------- |
+| 200           |
 
 ---
 
-#### **Ejercicio 37: Selecciona todos los actores y ordénalos por apellido en orden ascendente.**
-**Objetivo:** Este ejercicio tiene como objetivo listar todos los actores y ordenarlos por su apellido en orden ascendente.
+# Ejercicio 39:
 
-**Consulta SQL utilizada:**
+Seleccionar todos los actores y ordenarlos por apellido en orden ascendente
+
+## Consulta SQL
+
 ```sql
-SELECT CONCAT(a.first_name, ' ', a.last_name) AS "nombre_completo_actores"
-FROM actor AS a 
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS "nombre_completo_actores"
+FROM actor AS a
 ORDER BY a.last_name;
 ```
 
-**Explicación:**
-- `CONCAT(a.first_name, ' ', a.last_name)` se usa para concatenar el nombre y el apellido de los actores.
-- Se ordena por el apellido (`a.last_name`) de manera ascendente, lo que facilita la lectura al ordenar alfabéticamente a los actores.
+### Pasos realizados:
+
+1. Selección de columnas:
+   - `CONCAT(a.first_name, ' ', a.last_name)`: Une el nombre y apellido de cada actor con un espacio entre ellos para formar la columna `nombre_completo_actores`.
+2. Origen de los datos:
+
+   - `FROM actor AS a`: Se accede a la tabla actor con el alias `a`.
+
+3. Se ordena el resultado de la consulta alfabéticamente por el apellido del actor en orden ascendente (de la A a la Z).
+   - `ORDER BY a.last_name`:
+
+### Resultados (Extracto):
+
+| nombre_completo_actores |
+| ----------------------- |
+| DEBBIE AKROYD           |
+| KIRSTEN AKROYD          |
+| CHRISTIAN AKROYD        |
+| MERYL ALLEN             |
+| KIM ALLEN               |
+| CUBA ALLEN              |
+| ANGELINA ASTAIRE        |
+| RUSSELL BACALL          |
+| ...                     |
 
 ---
 
-#### **Ejercicio 38: Selecciona las 5 primeras películas de la tabla "film".**
-**Objetivo:** Este ejercicio tiene como objetivo seleccionar las primeras 5 películas de la tabla `film` según su `film_id`, lo cual es útil cuando se necesita una lista pequeña de películas para pruebas o demostraciones.
+# Ejercicio 40:
 
-**Consulta SQL utilizada:**
+Seleccionar las 5 primeras películas de la tabla "film"
+
+## Consulta SQL
+
 ```sql
-SELECT 
-    f.film_id AS "id_película", 
+SELECT
+    f.film_id AS "id_película",
     f.title AS "título"
 FROM film AS f
-WHERE film_id BETWEEN 1 AND 5;
+ORDER BY f.film_id
+LIMIT 5;
 ```
 
-**Explicación:**
-- Se seleccionan las 5 primeras películas de la tabla `film` utilizando la condición `BETWEEN 1 AND 5`.
-- Esto filtra las películas por `film_id` y es útil para mostrar un conjunto de datos pequeño.
+### Pasos realizados:
+
+1. Selección de columnas:
+   - `SELECT f.film_id, f.title`: Selecciona el identificador y el título de cada película.
+2. Origen de los datos:
+
+   - `FROM film AS f`: Se accede a la tabla film utilizando el alias `f`.
+
+3. Se ordenan las películas por su ID de forma ascendente.
+
+   - `ORDER BY f.film_id`
+
+4. Se restringe el número de resultados a las primeras 5 filas.
+   - `LIMIT 5`
+
+### Resultados:
+
+| id_película | título           |
+| ----------- | ---------------- |
+| 1           | ACADEMY DINOSAUR |
+| 2           | ACE GOLDFINGER   |
+| 3           | ADAPTATION HOLES |
+| 4           | AFFAIR PREJUDICE |
+| 5           | AFRICAN EGG      |
 
 ---
 
-#### **Ejercicio 39: Agrupa los actores por su nombre y cuenta cuántos actores tienen el mismo nombre. ¿Cuál es el nombre más repetido?**
-**Objetivo:** Este ejercicio tiene como objetivo encontrar cuántos actores comparten el mismo nombre, lo cual puede ayudar a entender patrones en la base de datos.
+# Ejercicio 41:
 
-**Consulta SQL utilizada:**
+Agrupar actores por nombre y contar cuántos se repiten
+
+## Consulta SQL
+
 ```sql
-SELECT 
-    a.first_name AS "nombre", 
-    COUNT(a.first_name) AS "veces_repetido"
-FROM actor AS a 
-GROUP BY a.first_name
-ORDER BY veces_repetido DESC;
+WITH nombre_repetido AS (
+    SELECT
+        first_name AS nombre,
+        COUNT(*) AS veces_repetido
+    FROM actor
+    GROUP BY first_name
+),
+max_repetido AS (
+    SELECT MAX(veces_repetido) AS max_reps
+    FROM nombre_repetido
+)
+SELECT
+    nr.nombre,
+    nr.veces_repetido
+FROM nombre_repetido  AS nr
+LEFT JOIN max_repetido mr
+	ON nr.veces_repetido = mr.max_reps;
 ```
 
-**Explicación:**
-- Se utiliza `COUNT()` para contar cuántos actores tienen el mismo nombre (`first_name`).
-- Los resultados se agrupan por `first_name` y se ordenan de mayor a menor según la cantidad de repeticiones.
+### Pasos realizados:
+
+1. CTE `nombre_repetido`:
+
+   - Agrupa los registros de la tabla `actor` por el campo `first_name`.
+   - Cuenta cuántas veces aparece cada nombre.
+   - Devuelve dos columnas: el `nombre` y su número de repeticiones (`veces_repetido`).
+
+2. CTE `max_repetido`:
+
+   - A partir del CTE `nombre_repetido`, se obtiene el número máximo de repeticiones
+     - `SELECT MAX(veces_repetido) AS max_reps`
+     - Este valor representa la cantidad de veces que aparece el nombre más común en la tabla.
+
+3. Consulta final con INNER JOIN:
+   - Se hace un `INNER JOIN` entre `nombre_repetido` y `max_repetido` utilizando como condición que el número de repeticiones de un nombre coincida con el máximo hallado.
+   - De esta forma se obtienen todos los nombres que tienen la máxima frecuencia (no solo uno, en caso de empate).
+
+### Resultados:
+
+| nombre   | veces_repetido |
+| -------- | -------------- |
+| PENELOPE | 4              |
+| KENNETH  | 4              |
+| JULIA    | 4              |
+
+### Conclusiones:
+
+La base de datos contiene varios actores que comparten nombre. En este caso, PENELOPE, KENNETH y JULIA son los nombres más comunes, cada uno aparece 4 veces.
 
 ---
 
-#### **Ejercicio 40: Encuentra todos los alquileres y los nombres de los clientes que los realizaron.**
-**Objetivo:** Este ejercicio tiene como objetivo mostrar todos los alquileres realizados y los clientes asociados a esos alquileres.
+# Ejercicio 42: Alquileres y nombres de los clientes
 
-**Consulta SQL utilizada:**
+Encuentra todos los alquileres registrados en la base de datos y los nombres completos de los clientes que los realizaron.
+
+### 📜 Consulta SQL
+
 ```sql
-SELECT 
-    r.rental_id AS "id_alquiler", 
+SELECT
+    r.rental_id AS "id_alquiler",
     CONCAT(c.first_name, ' ', c.last_name) AS "cliente"
 FROM rental AS r
-LEFT JOIN customer AS c 
+LEFT JOIN customer AS c
     ON r.customer_id = c.customer_id;
 ```
 
-**Explicación:**
-- Se realiza un `LEFT JOIN` entre las tablas `rental` y `customer` para obtener los nombres de los clientes junto con sus alquileres.
-- Esto es útil para analizar los clientes y los alquileres realizados por cada uno.
+### Pasos realizados:
+
+1. Selección de columnas:
+   - `r.rental_id`: el identificador único de cada alquiler, renombrado como `id_alquiler`
+   - Se combinan el nombre y el apellido del cliente para mostrar su nombre completo en una sola columna llamada `cliente`.
+     - `CONCAT(c.first_name, ' ', c.last_name)`
+2. Cláusula FROM y LEFT JOIN:
+   - Se parte de la tabla `rental`, que contiene todos los registros de alquileres.
+   - Se hace un `LEFT JOIN` con la tabla `customer` para obtener la información del cliente correspondiente a cada `customer_id`.
+   - El uso de `LEFT JOIN` garantiza que todos los alquileres aparecerán en el resultado, incluso si alguno no tiene un cliente asignado (aunque en esta base de datos, eso no ocurre normalmente).
+3. Cláusula ON:
+   - Se establece la relación entre ambas tablas mediante el campo `customer_id`, que es `clave foránea en rental` y `clave primaria en customer`.
+
+### Resultados:
+
+| id_alquiler | cliente            |
+| ----------- | ------------------ |
+| 1           | CHARLOTTE HUNTER   |
+| 2           | TOMMY COLLAZO      |
+| 3           | MANUEL MURRELL     |
+| 4           | ANDREW PURDY       |
+| 5           | DELORES HANSEN     |
+| 6           | NELSON CHRISTENSON |
+| 7           | CASSANDRA WALTERS  |
+| 8           | MINNIE ROMERO      |
+| 9           | ELLEN SIMPSON      |
+| 10          | DANNY ISOM         |
+| ...         | ...                |
+
+### Conclusiones:
+
+Esta consulta relaciona correctamente cada alquiler con su cliente.
 
 ---
 
-#### **Ejercicio 41: Muestra todos los clientes y sus alquileres si existen, incluyendo aquellos que no tienen alquileres.**
-**Objetivo:** Este ejercicio tiene como objetivo mostrar todos los clientes, incluidos aquellos que no han realizado ningún alquiler.
+# 🧪 Ejercicio 43: Clientes y sus alquileres (si existen)
 
-**Consulta SQL utilizada:**
+Muestra todos los clientes y sus alquileres si existen, incluyendo aquellos que no tienen alquileres.
+
+### 📜 Consulta SQL
+
 ```sql
-SELECT 
-    CONCAT(c.first_name, ' ', c.last_name) AS "cliente", 
+SELECT
+    CONCAT(c.first_name, ' ', c.last_name) AS "cliente",
     r.rental_id AS "id_alquiler"
-FROM customer AS c 
-LEFT JOIN rental AS r 
+FROM customer AS c
+LEFT JOIN rental AS r
     ON c.customer_id = r.customer_id;
 ```
 
-**Explicación:**
-- Utiliza `LEFT JOIN` para garantizar que se muestren todos los clientes, incluso aquellos que no tienen alquileres registrados.
-- Es útil para obtener un conjunto de datos completo de clientes, incluidos aquellos sin actividad de alquiler.
+### Pasos realizados:
+
+1. Selección de columnas:
+   - Concatenamos el nombre y el apellido del cliente para formar una columna con su nombre completo, denominada `cliente`.
+     - `CONCAT(c.first_name, ' ', c.last_name)`
+   - Seleccionamos el identificador de alquiler `rental_id` de la tabla `rental` para cada cliente que tenga un alquiler.
+2. Cláusula `FROM` y `LEFT JOIN`:
+   - Empezamos desde la tabla `customer`, que contiene todos los registros de clientes.
+   - Hacemos un `LEFT JOIN` con la tabla `rental` para vincular los clientes con los alquileres asociados.
+   - El LEFT JOIN asegura que todos los clientes sean listados, incluso aquellos que no tienen un alquiler registrado. Para estos clientes sin alquiler, el campo `id_alquiler` será `NULL`.
+3. Cláusula ON:
+   - Se establece la relación entre ambas tablas a través del campo `customer_id`, que es la `clave foránea en la tabla rental` y la `clave primaria en la tabla customer`.
+
+### Resultados:
+
+| cliente            | id_alquiler |
+| ------------------ | ----------- |
+| CHARLOTTE HUNTER   | 1           |
+| TOMMY COLLAZO      | 2           |
+| MANUEL MURRELL     | 3           |
+| ANDREW PURDY       | 4           |
+| DELORES HANSEN     | 5           |
+| NELSON CHRISTENSON | 6           |
+| CASSANDRA WALTERS  | 7           |
+| MINNIE ROMERO      | 8           |
+| ELLEN SIMPSON      | 9           |
+| DANNY ISOM         | 10          |
+| ...                | ...         |
+
+### Conclusiones:
+
+## Es una consulta útil para obtener una lista completa de clientes, con o sin alquileres.
+
+# Ejercicio 44:
+
+Realiza un `CROSS JOIN` entre las tablas `film` y `category`.  
+¿Aporta valor esta consulta? ¿Por qué?
 
 ---
 
-#### **Ejercicio 42: Realiza un CROSS JOIN entre las tablas "film" y "category". ¿Aporta valor esta consulta? ¿Por qué?**
-**Objetivo:** Este ejercicio tiene como objetivo realizar un `CROSS JOIN` entre las tablas `film` y `category`, lo cual genera un producto cartesiano de ambas tablas.
+### 📜 Consulta SQL
 
-**Consulta SQL utilizada:**
 ```sql
-SELECT f.title, c.name 
+SELECT
+    f.title AS "película",
+    c.name AS "categoría"
 FROM film AS f
 CROSS JOIN category AS c;
 ```
 
-**Explicación:**
-- El `CROSS JOIN` genera una combinación de todas las películas con todas las categorías. Sin embargo, como estas tablas no están relacionadas directamente, el resultado es un gran número de combinaciones, lo que generalmente no es útil sin una relación lógica.
-- Este tipo de unión no se utiliza a menudo en bases de datos relacionales porque puede generar resultados masivos e irrelevantes, a menos que haya una razón específica para hacerlo.
+### Pasos realizados:
+
+1. Selección de columnas:
+
+   - `f.title`: Título de la película desde la tabla film, renombrado como `pelìcula`
+   - `c.name`: Nombre de la categoría desde la tabla category,renombrado como `categoría`
+
+2. Cláusula `FROM` con `CROSS JOIN`:
+   - El CROSS JOIN combina cada película con cada categoría, sin considerar relaciones reales entre ellas.
+   - Si hay 1.000 películas y 16 categorías, el resultado tendrá 16.000 filas.
+
+### Resultados:
+
+| película         | categoría   |
+| ---------------- | ----------- |
+| ACADEMY DINOSAUR | Action      |
+| ACADEMY DINOSAUR | Animation   |
+| ACADEMY DINOSAUR | Children    |
+| ACADEMY DINOSAUR | Classics    |
+| ACADEMY DINOSAUR | Comedy      |
+| ACADEMY DINOSAUR | Documentary |
+| ACADEMY DINOSAUR | Drama       |
+| ACADEMY DINOSAUR | Family      |
+| ACADEMY DINOSAUR | Foreign     |
+| ...              | ...         |
+
+### Conclusiones:
+
+Esta consulta no aporta valor en este contexto porque: - No existe relación entre las películas y las categorías mostradas. - Se generan combinaciones falsas y sin sentido.
+En este caso concreto, la consulta **no es útil para análisis reales del catálogo de películas.**
 
 ---
 
-#### **Ejercicio 43: Encuentra los actores que han participado en películas de la categoría 'Action'.**
-**Objetivo:** Este ejercicio tiene como objetivo encontrar los actores que han participado en películas que pertenecen a la categoría 'Action'.
+# Ejercicio 45:
 
-**Consulta SQL utilizada:**
+Encuentra los actores que han participado en películas de la categoría **'Action'**.
+
+---
+
+### Consulta SQL
+
 ```sql
-SELECT 
-    CONCAT(a.first_name, ' ', a.last_name) AS "actor", 
-    c.name AS "categoría"
-FROM actor AS a 
-LEFT JOIN film_actor AS fa 
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS "actor",
+    c."name" AS "categoría"
+FROM actor AS a
+LEFT JOIN film_actor AS fa
     ON a.actor_id = fa.actor_id
-LEFT JOIN film AS f 
+LEFT JOIN film AS f
     ON fa.film_id = f.film_id
-LEFT JOIN film_category AS fc 
+LEFT JOIN film_category AS fc
     ON f.film_id = fc.film_id
-LEFT JOIN category AS c 
+LEFT JOIN category AS c
     ON fc.category_id = c.category_id
-WHERE c.name = 'Action';
+WHERE c."name" = 'Action';
 ```
 
-**Explicación:**
-- Se utilizan varias uniones (`LEFT JOIN`) para conectar las tablas `actor`, `film_actor`, `film`, `film_category` y `category`.
-- Se filtra por la categoría `'Action'` para mostrar solo los actores que han participado en películas de esta categoría.
+### Pasos realizados:
+
+1. Tablas involucradas:
+   - `actor`: contiene los datos de los actores.
+   - `film_actor`: relación entre actores y películas.
+   - `film`: información sobre las películas.
+   - `film_category`: relación entre películas y categorías.
+   - `category`: nombres de las categorías.
+2. Uniones (JOINs):
+
+   - Se hace un `LEFT JOIN` en cascada desde `actor` hasta `category` para mantener todos los actores y sus películas (aunque con el filtro final ya actúa como INNER JOIN).
+
+3. Filtro WHERE:
+   - Solo se incluyen las películas cuya categoría es exactamente `Action`
+
+### Resultados (extracto):
+
+| actor               | categoría |
+| ------------------- | --------- |
+| JOHNNY LOLLOBRIGIDA | Action    |
+| JULIA MCQUEEN       | Action    |
+| VAL BOLGER          | Action    |
+| KIRK JOVOVICH       | Action    |
+| JAMES PITT          | Action    |
+| PENELOPE CRONYN     | Action    |
+| KEVIN BLOOM         | Action    |
+| RIP CRAWFORD        | Action    |
+| SIDNEY CROWE        | Action    |
+| ...                 | ...       |
+
+### Conclusiones:
+
+La consulta identifica correctamente a los actores que han participado en películas etiquetadas con la categoría 'Action'.
 
 ---
 
-#### **Ejercicio 44: Encuentra todos los actores que no han participado en películas.**
-**Objetivo:** Este ejercicio tiene como objetivo identificar a los actores que no han participado en ninguna película.
+# Ejercicio 46:
 
-**Consulta SQL utilizada:**
+Encuentra todos los actores que **no han participado en ninguna película**.
+
+### Consulta SQL
+
 ```sql
-SELECT 
+SELECT
     CONCAT(a.first_name, ' ', a.last_name) AS "actor"
-FROM actor AS a 
-LEFT JOIN film_actor AS fa 
+FROM actor AS a
+LEFT JOIN film_actor AS fa
     ON a.actor_id = fa.actor_id
 WHERE fa.film_id IS NULL;
 ```
 
-**Explicación:**
-- Se realiza un `LEFT JOIN` entre las tablas `actor` y `film_actor`, y se utiliza `WHERE fa.film_id IS NULL` para filtrar los actores que no tienen ninguna película asociada.
-- Este tipo de consulta es útil para identificar actores sin participación en ninguna película.
+### Pasos realizados:
+
+1. Tablas utilizadas:
+
+   - `actor`: contiene todos los actores registrados.
+   - `film_actor`: tabla intermedia que relaciona actores con películas.
+
+2. LEFT JOIN:
+
+   - Se utiliza para mantener todos los registros de la tabla `actor`, aunque no tengan coincidencias en `film_actor`.
+
+3. Condición `WHERE fa.film_id IS NULL`:
+   - Filtra los actores sin relación en `film_actor`, es decir, que no han participado en ninguna película.
+
+### Conclusiones:
+
+No se han obtenido resultados. - Esto indica que todos los actores registrados han participado en al menos una película.
 
 ---
 
-#### **Ejercicio 45: Encuentra el nombre de los actores con el número de películas en las que han participado.**
-**Objetivo:** Este ejercicio tiene como objetivo contar cuántas películas ha protagonizado cada actor.
+# 🧪 Ejercicio 47:
 
-**Consulta SQL utilizada:**
-```sql
-SELECT 
-    CONCAT(a.first_name, ' ', a.last_name) AS "actor", 
-    COUNT(fa.film_id) AS "nºpelículas"
-FROM actor AS a
-LEFT JOIN film_actor AS fa 
-    ON a.actor_id = fa.actor_id
-GROUP BY a.first_name, a.last_name;
-```
+Selecciona el nombre de los actores junto con el número de películas en las que han participado.
 
-**Explicación:**
-- Se cuenta cuántas películas están asociadas a cada actor utilizando `COUNT(fa.film_id)`.
-- El resultado muestra el nombre completo de los actores y el número de películas en las que han participado.
-
----
-
-#### **Ejercicio 46: Crea una vista llamada "actor_num_peliculas" que muestre los nombres de los actores y el número de películas en las que han participado.**
-**Objetivo:** Este ejercicio crea una vista que almacena la relación de actores con el número de películas en las que han participado.
-
-**Consulta SQL utilizada:**
-```sql
-CREATE VIEW actor_num_peliculas AS 
-SELECT 
-    CONCAT(a.first_name, ' ', a.last_name) AS "actor", 
-    COUNT(fa.film_id) AS "nºpelículas"
-FROM actor AS a
-LEFT JOIN film_actor AS fa 
-    ON a.actor_id = fa.actor_id
-GROUP BY a.first_name, a.last_name;
-```
-
----
-
-
-### 📝 Ejercicio 55: Actores que no han actuado en películas de la categoría 'Music'
-
-#### 🔹 Enunciado  
-Encuentra el nombre y apellido de los actores que **no han actuado** en ninguna película de la categoría `Music`.
-
-#### 🔍 Consulta SQL utilizada
-```sql
-SELECT 	
-    CONCAT(a.first_name, ' ', a.last_name) AS "actor"
-FROM actor AS a 
-WHERE a.actor_id NOT IN (
-    SELECT DISTINCT fa.actor_id
-    FROM film_actor AS fa 
-        LEFT JOIN film AS f ON fa.film_id = f.film_id
-        LEFT JOIN film_category AS fc ON f.film_id = fc.film_id
-        LEFT JOIN category AS c ON fc.category_id = c.category_id
-    WHERE c."name" ILIKE 'Music'
-);
-```
-
----
-
-### 📊 Conclusiones del análisis
-
-- Se ha identificado un total de **56 actores** que no han participado en ninguna película clasificada en la categoría **'Music'**.
-- Esto implica que **una parte significativa del elenco** de la base de datos no está relacionada con este género, lo que puede sugerir una **producción limitada** de películas musicales en el catálogo o una preferencia de casting distinta para ese tipo de producciones.
-- La consulta emplea una subconsulta con `NOT IN` y `DISTINCT`, que es una estrategia habitual para identificar elementos **excluidos** de un conjunto, como en este caso.
-- Además, se utilizó `ILIKE` para asegurar que el filtro de categoría sea **insensible a mayúsculas**, lo que mejora la robustez del análisis.
-
----
-### Ejercicio 60: Clientes que han alquilado al menos 7 películas distintas
-
-#### 🔍 Objetivo:
-Identificar a los clientes que han alquilado **siete o más películas distintas**. El propósito es conocer qué clientes tienen un alto nivel de interacción con el videoclub en términos de variedad de títulos alquilados.
-
-#### 📄 Consulta SQL:
-```sql
-SELECT 
-    CONCAT(c.first_name, ' ', c.last_name) AS "nombre_cliente",
-    COUNT(DISTINCT i.film_id) AS "películas_distintas"
-FROM customer AS c 
-    INNER JOIN rental AS r ON c.customer_id = r.customer_id
-    INNER JOIN inventory AS i ON r.inventory_id = i.inventory_id
-GROUP BY c.first_name, c.last_name 
-HAVING COUNT(DISTINCT i.film_id) >= 7
-ORDER BY c.last_name;
-### 🧠 Análisis de la consulta:
-
-- Se utiliza `CONCAT` para mostrar el nombre completo del cliente (nombre y apellido).
-- Se hace un conteo de películas distintas alquiladas por cliente con `COUNT(DISTINCT i.film_id)`, lo que garantiza que no se repitan títulos alquilados múltiples veces.
-- La combinación de las tablas `customer`, `rental` e `inventory` permite conectar a cada cliente con las películas que alquiló.
-- Se agrupa por nombre y apellido del cliente (`GROUP BY`) para consolidar los datos por persona.
-- El filtro `HAVING` asegura que solo se muestren aquellos clientes que alquilaron 7 o más películas distintas.
-- Se ordena el resultado por `last_name` para facilitar la lectura alfabética.
-
----
-
-### 📈 Resultados observados:
-
-- El listado devuelve más de 100 clientes que han alquilado al menos 7 películas diferentes.
-- Algunos de ellos superan las 30 películas distintas, lo que revela un alto nivel de interacción con el videoclub.
-- Se observa diversidad tanto en clientes con apellidos que empiezan por letras iniciales como por letras avanzadas, lo que indica una distribución homogénea.
-
----
-
-### 💡 Conclusiones:
-
-- Este análisis permite identificar a los clientes más comprometidos con el videoclub en términos de variedad de títulos alquilados.
-- A partir de este grupo, se pueden diseñar estrategias de fidelización como recomendaciones personalizadas, descuentos o membresías premium.
-- También puede servir como base para futuros análisis de comportamiento: por ejemplo, qué géneros consumen más o si hay patrones temporales en los alquileres.
-
-### Ejercicio 61. Encuentra la cantidad total de películas alquiladas por categoría y muestra el nombre de la categoría junto con el recuento de alquileres
-
-### 🧠 Análisis
-
-El objetivo de este ejercicio es **contar cuántas veces se han alquilado películas pertenecientes a cada categoría**.  
-Para lograrlo, debemos recorrer varias relaciones:
-
-- `category` contiene el nombre de la categoría.
-- `film_category` relaciona películas con categorías.
-- `film` nos permite conectar con las películas.
-- `inventory` conecta las películas con copias disponibles para alquilar.
-- `rental` contiene los alquileres registrados.
-
-La estrategia es realizar varios `LEFT JOIN` desde `category` hasta `rental` para asegurar que incluyamos incluso las categorías con 0 alquileres (aunque en la práctica, todas parecen tener al menos uno).
-
-Finalmente, agrupamos por el nombre de la categoría (`GROUP BY c.name`) y contamos los alquileres asociados.
-
-### 🧾 Consulta SQL
-
-```sql
-SELECT 	
-	c."name" AS "categoría",
-	COUNT(r.rental_id) AS "recuento_alquileres"
-FROM category AS c
-	LEFT JOIN film_category AS fc 
-		ON c.category_id = fc.category_id
-	LEFT JOIN film AS f 
-		ON fc.film_id = f.film_id
-	LEFT JOIN inventory AS i 
-		ON f.film_id = i.film_id 
-	LEFT JOIN rental AS r 
-		ON i.inventory_id = r.inventory_id
-GROUP BY c."name";
-```
-
-### 📊 Resultado
-
-| categoría   | recuento_alquileres |
-|-------------|---------------------|
-| Sports      | 1.179               |
-| Classics    | 939                 |
-| New         | 940                 |
-| Family      | 1.096               |
-| Comedy      | 941                 |
-| Animation   | 1.166               |
-| Travel      | 837                 |
-| Music       | 830                 |
-| Drama       | 1.060               |
-| Horror      | 846                 |
-| Sci-Fi      | 1.101               |
-| Games       | 969                 |
-| Documentary | 1.050               |
-| Foreign     | 1.033               |
-| Action      | 1.112               |
-| Children    | 945                 |
-
-### ✅ Conclusión
-
-Las categorías con mayor número de alquileres son:
-- **Sports (1.179)**
-- **Animation (1.166)**
-- **Action (1.112)**
-
-Por el contrario, las categorías con menor actividad son:
-- **Music (830)**
-- **Travel (837)**
-- **Horror (846)**
-
-Esto puede proporcionar información útil para tomar decisiones sobre qué géneros potenciar, promocionar o revisar en el catálogo.
-
-## 62. Encuentra el número de películas por categoría estrenadas en 2006
-
-### 🧠 Análisis
-
-Para resolver este ejercicio, se requiere:
-
-- Obtener las categorías desde la tabla `category`.
-- Asociarlas con las películas mediante `film_category` y `film`.
-- Filtrar las películas estrenadas en 2006 (`release_year = 2006`).
-- Agrupar los resultados por categoría.
-- Contar el número de películas por cada categoría.
-
-Se utiliza una combinación de `LEFT JOIN` para asegurar que se mantengan todas las categorías (aunque en este caso todas tienen películas en 2006), junto con `GROUP BY` para el recuento.
-
-### 📌 Consulta SQL
-
-```sql
-SELECT 
-	COUNT(f.film_id) AS "películas",
-	c.name AS "categoría",
-	f.release_year AS "año_estreno"
-FROM category AS c 
-	LEFT JOIN film_category AS fc 
-		ON c.category_id = fc.category_id
-	LEFT JOIN film AS f 
-		ON fc.film_id = f.film_id
-WHERE f.release_year = '2006'
-GROUP BY c."name", f.release_year
-ORDER BY películas DESC;
-```
-
-### 📊 Resultados
-
-| películas | categoría   | año_estreno |
-|-----------|-------------|-------------|
-| 74        | Sports      | 2006        |
-| 73        | Foreign     | 2006        |
-| 69        | Family      | 2006        |
-| 68        | Documentary | 2006        |
-| 66        | Animation   | 2006        |
-| 64        | Action      | 2006        |
-| 63        | New         | 2006        |
-| 62        | Drama       | 2006        |
-| 61        | Sci-Fi      | 2006        |
-| 61        | Games       | 2006        |
-| 60        | Children    | 2006        |
-| 58        | Comedy      | 2006        |
-| 57        | Travel      | 2006        |
-| 57        | Classics    | 2006        |
-| 56        | Horror      | 2006        |
-| 51        | Music       | 2006        |
-
-### ✅ Conclusiones
-
-- En el año 2006 se estrenaron películas en **todas las categorías existentes**.
-- La categoría con más estrenos fue **"Sports"** con **74 películas**, seguida de cerca por **"Foreign"** y **"Family"**.
-- La categoría con menos estrenos fue **"Music"**, aunque aun así cuenta con un volumen considerable (51 películas).
-- Esto sugiere una distribución relativamente uniforme del número de películas por categoría para ese año, sin grandes desequilibrios.
-
-
-
-## 63. Obtén todas las combinaciones posibles de trabajadores con las tiendas que tenemos
-
-### 🧠 Análisis
-
-Este ejercicio pide generar el **producto cartesiano** entre los trabajadores (`staff`) y las tiendas (`store`). Esto significa que cada trabajador se combina con cada tienda, independientemente de dónde trabaje realmente.
-
-Para lograrlo:
-
-- Se utiliza un `CROSS JOIN`, que genera todas las combinaciones posibles entre dos tablas.
-- Se muestra el nombre completo del trabajador usando `CONCAT(first_name, ' ', last_name)`.
-- Se incluye la `store_id` de cada tienda.
-
-### 📌 Consulta SQL
-
-```sql
-SELECT 
-	CONCAT(s.first_name, ' ', s.last_name) AS "trabajador",
-	s2.store_id AS "tienda"
-FROM staff AS s 
-	CROSS JOIN store AS s2;
-```
-
-### 📊 Resultados (fragmento)
-
-| trabajador    | tienda |
-|---------------|--------|
-| Mike Hillyer  | 1      |
-| Mike Hillyer  | 2      |
-| Jon Stephens  | 1      |
-| Jon Stephens  | 2      |
-
-**Total de combinaciones:** 4 (2 trabajadores × 2 tiendas)
-
-### ✅ Conclusiones
-
-- El `CROSS JOIN` genera el conjunto completo de combinaciones posibles, sin necesidad de condiciones de unión.
-- Este tipo de consulta puede ser útil para simular asignaciones, realizar análisis hipotéticos o construir matrices de asignación.
-- Aunque en la realidad cada trabajador está asignado a una sola tienda, este tipo de combinación permite ver todas las posibilidades si eso no se tuviera en cuenta.
-
-## Ejercicio 64. Encuentra la cantidad total de películas alquiladas por cada cliente
-
-### 🧠 Análisis
-
-Este ejercicio tiene como objetivo obtener el número total de películas que cada cliente ha alquilado. Para ello, debemos:
-
-- Consultar la tabla `customer` para obtener los datos de cada cliente.
-- Relacionar `customer` con `rental`, usando `customer_id`, ya que en `rental` se guarda el registro de cada alquiler.
-- Contar la cantidad de registros de alquiler por cliente (es decir, cuántos `rental_id` hay asociados a cada uno).
-- Usar `LEFT JOIN` para asegurarnos de incluir clientes que no hayan realizado ningún alquiler (aunque en este caso no aparecen, la lógica es correcta).
-- Agrupar por cliente y ordenar por la cantidad de alquileres.
-
-### 📌 Consulta SQL
+### 📜 Consulta SQL
 
 ```sql
 SELECT
-	c.customer_id AS "id_cliente",
-	CONCAT(c.first_name, ' ', c.last_name) AS "nombre_cliente",
-	COUNT(r.rental_id) AS "cantidad_alquileres"
-FROM customer AS c 
-	LEFT JOIN rental AS r  
-		ON c.customer_id = r.customer_id
+    CONCAT(a.first_name, ' ', a.last_name) AS "actor",
+    COUNT(fa.film_id) AS "nºpelículas"
+FROM actor AS a
+LEFT JOIN film_actor AS fa
+    ON a.actor_id = fa.actor_id
+GROUP BY a.first_name, a.last_name
+ORDER BY nºpelículas DESC;
+```
+
+### Pasos realizados:
+
+1. Tablas involucradas:
+
+   - `actor`: contiene los datos personales de cada actor.
+   - `film_actor`: relaciona actores con películas.
+
+2. LEFT JOIN:
+
+   - Garantiza que se incluyan todos los actores, incluso si no han participado en ninguna película (aunque ya hemos visto en el ejercicio 46 que todos han participado en al menos una).
+
+3. `COUNT(fa.film_id)`:
+   -Cuenta cuántas veces aparece cada `actor` en la tabla `film_actor`, es decir, el número de películas en las que ha actuado.
+
+4. GROUP BY:
+
+   - Agrupa los resultados por nombre y apellido del actor para que se pueda aplicar la `función de agregación COUNT`.
+
+5. ORDER BY nºpelículas DESC:
+   - Ordena el resultado desde el actor con más películas hasta el que tiene menos.
+
+### Resultados(extracto):
+
+| actor           | nºpelículas |
+| --------------- | ----------- |
+| SUSAN DAVIS     | 54          |
+| GINA DEGENERES  | 42          |
+| WALTER TORN     | 41          |
+| MARY KEITEL     | 40          |
+| MATTHEW CARREY  | 39          |
+| ...             | ...         |
+| SISSY SOBIESKI  | 18          |
+| JULIA ZELLWEGER | 16          |
+| JULIA FAWCETT   | 15          |
+| JUDY DEAN       | 15          |
+| EMILY DEE       | 14          |
+
+### Conclusiones:
+
+`Susan Davis` es la actriz con mayor número de películas en la base de datos Sakila, participando en 54 filmes.
+
+Todos los actores han participado en al menos una película, lo que valida lo encontrado en el ejercicio anterior.
+
+Este tipo de consulta es útil para análisis de productividad, popularidad o frecuencia de colaboración dentro del catálogo cinematográfico de la base de datos.
+
+---
+
+### 📝 Ejercicio 48
+
+Crea una vista llamada `actor_num_pelicula` que muestre los nombres de los actores y el número de películas en las que han participado.
+
+### **Código SQL:**
+
+```sql
+CREATE VIEW actor_num_pelicula AS
+SELECT
+    CONCAT(a.first_name, ' ', a.last_name) AS "actor",
+    COUNT(fa.film_id) AS "nºpelículas"
+FROM actor AS a
+    LEFT JOIN film_actor AS fa
+        ON a.actor_id = fa.actor_id
+GROUP BY a.first_name, a.last_name;
+
+-- Consulta para comprobar el contenido de la vista
+SELECT * FROM actor_num_pelicula;
+```
+
+### Pasos realizados:
+
+1. Se crea una vista que combina las tablas `actor` y `film_actor` para contar el número de películas asociadas a cada actor.
+
+2. La función `CONCAT` se usa para mostrar el nombre completo del actor en un solo campo `actor`.
+
+3. Se utiliza `LEFT JOIN` para incluir también a los actores que no han participado en ninguna película (aunque en los resultados todos tienen al menos una).
+
+4. La agrupación se realiza por a.`first_name` y a.`last_name` para calcular el total de películas por actor.
+
+### Resultados (extracto):
+
+| actor            | nºpelículas |
+| ---------------- | ----------- |
+| HARRISON BALE    | 28          |
+| JULIA ZELLWEGER  | 16          |
+| AUDREY OLIVIER   | 25          |
+| FAY WOOD         | 22          |
+| GREGORY GOODING  | 30          |
+| JEFF SILVERSTONE | 25          |
+| ADAM HOPPER      | 22          |
+| KEVIN BLOOM      | 21          |
+| RITA REYNOLDS    | 20          |
+| ...              | ...         |
+
+### Conclusiones:
+
+La vista `actor_num_pelicula` permite acceder rápidamente a una lista consolidada de actores con su respectiva carga de trabajo medida en cantidad de películas.
+
+Esta información es útil para análisis como:
+
+- Identificar a los actores más recurrentes en el catálogo.
+- Detectar posibles desequilibrios en la distribución de papeles entre actores.
+- Cruzar con métricas de rendimiento o popularidad para evaluar la rentabilidad de cada actor.
+
+Se observa que hay una gran diversidad en el número de películas por actor, con casos que van desde los 14 hasta más de 50 películas.
+
+---
+
+### 📝 Ejercicio 49
+
+Calcula el número total de alquileres realizados por cada cliente.
+
+**Código SQL:**
+
+```sql
+SELECT
+    CONCAT(c.first_name, ' ', c.last_name) AS "cliente",
+    COUNT(r.rental_id) AS "alquileres"
+FROM customer AS c
+    LEFT JOIN rental AS r
+        ON c.customer_id = r.customer_id
+GROUP BY c.first_name, c.last_name;
+```
+
+### Pasos realizados:
+
+1. Se realiza un `LEFT JOIN` entre las tablas `customer` y `rental` para obtener todos los clientes y el número de alquileres que han realizado.
+
+2. Se usa `CONCAT` para unir el nombre y el apellido del cliente en un solo campo llamado `cliente`.
+
+3. El conteo de alquileres se hace sobre r.`rental_id`, y se agrupa por nombre y apellido.
+
+### Resultados (extracto):
+
+| cliente              | alquileres |
+| -------------------- | ---------- |
+| JONATHAN SCARBOROUGH | 18         |
+| TRACEY BARRETT       | 27         |
+| RUSSELL BRINSON      | 36         |
+| FRANKLIN TROUTMAN    | 22         |
+| CASSANDRA WALTERS    | 30         |
+| CECIL VINES          | 26         |
+| THOMAS GRIGSBY       | 25         |
+| JORDAN ARCHULETA     | 30         |
+| RUBY WASHINGTON      | 28         |
+| ...                  | ...        |
+
+### Conclusiones:
+
+La consulta permite obtener rápidamente el volumen de interacción de cada cliente con el servicio, medido por el número de alquileres realizados.
+
+Los valores obtenidos oscilan entre los 12 y 39 alquileres, lo que muestra una variabilidad considerable en la frecuencia de uso del servicio.
+
+Clientes como RHONDA KENNEDY o MARION SNYDER destacan con 39 alquileres, lo que podría indicar un alto grado de fidelidad o interés en el catálogo de películas.
+
+Por el contrario, otros clientes como BRIAN WYMAN tienen tan solo 12 alquileres, lo que podría ser indicativo de baja participación o de clientes ocasionales.
+
+Esta información puede servir para segmentar clientes según su nivel de actividad, permitiendo aplicar estrategias como:
+
+Programas de fidelización para usuarios frecuentes.
+
+Campañas de reactivación para usuarios poco activos.
+
+---
+
+### Ejercicio 50
+
+Calcula la duración total de las películas en la categoría `'Action'`.
+
+**Código SQL:**
+
+```sql
+SELECT
+    c."name" AS "categoría",
+    SUM(f.length) AS "duración"
+FROM film AS f
+    LEFT JOIN film_category AS fc
+        ON f.film_id = fc.film_id
+    LEFT JOIN category AS c
+        ON fc.category_id = c.category_id
+WHERE c.name = 'Action'
+GROUP BY c."name"
+```
+
+### Pasos realizados:
+
+1. Se parte de la tabla `film`, que contiene información sobre las películas y su duración (`length`).
+
+2. Se conecta con `film_category` para relacionar cada película con su categoría.
+
+3. Se usa un segundo `LEFT JOIN` con `category` para obtener el nombre de la categoría.
+
+4. Se filtra por la categoría `Action`.
+
+5. Finalmente, se calcula la suma total de duración `(SUM(length))` para todas las películas de esa categoría.
+
+### Resultados:
+
+| categoría | duración |
+| --------- | -------- |
+| Action    | 7143     |
+
+### Conclusiones:
+
+La duración total de todas las películas clasificadas como 'Action' es de `7143 minutos`.
+
+- Este valor indica que, dentro del catálogo, 'Action' representa un volumen significativo de contenido en términos de tiempo de reproducción.
+
+---
+
+# Ejercicio 51:
+
+Crea una tabla temporal denominada `cliente_rentas_temporal` que almacene el total de alquileres por cliente.
+
+## Consulta SQL
+
+```sql
+CREATE TEMPORARY TABLE cliente_rentas_temporal AS
+SELECT
+    CONCAT(c.first_name, ' ', c.last_name) AS "cliente",
+    COUNT(r.rental_id) AS "alquileres"
+FROM customer AS c
+    LEFT JOIN rental AS r
+    ON c.customer_id = r.customer_id
+GROUP BY c.first_name, c.last_name;
+-- Consulta para comprobar el contenido de la tabla temporal
+SELECT *
+FROM cliente_rentas_temporal;
+```
+
+### Pasos realizados:
+
+1. Creación de la tabla temporal:
+
+   - Utilizamos la sentencia `CREATE TEMPORARY TABLE` para crear la tabla `cliente_rentas_temporal`.
+   - La tabla almacenará dos columnas:
+     - `cliente`: Nombre completo del cliente, formado por la concatenación de los campos `first_name` y `last_name` de la tabla `customer`.
+     - `alquileres`: El total de alquileres realizados por cada cliente.
+       - Esto se obtiene mediante la función `COUNT` que cuenta el número de registros en la tabla rental para cada cliente.
+
+2. Join entre las tablas:
+
+   - Se realiza un `LEFT JOIN` entre las tablas `customer` y `rental` usando `customer_id` para vincular ambas tablas.
+   - Esto asegura que se incluyan todos los clientes, incluso aquellos que no han realizado alquileres (su número de alquileres será 0).
+
+3. Agrupación por cliente:
+
+   - Se agrupan los resultados por los campos `first_name` y `last_name`, lo que permite contar los alquileres por cada cliente de manera individual.
+
+4. Selección de resultados:
+   - Una vez creada la tabla temporal, se realiza una consulta `SELECT *` para visualizar los datos almacenados en la tabla `cliente_rentas_temporal`.
+
+### Resultados:
+
+| cliente              | alquileres |
+| -------------------- | ---------- |
+| JONATHAN SCARBOROUGH | 18         |
+| TRACEY BARRETT       | 27         |
+| RUSSELL BRINSON      | 36         |
+| FRANKLIN TROUTMAN    | 22         |
+| CASSANDRA WALTERS    | 30         |
+| CECIL VINES          | 26         |
+| THOMAS GRIGSBY       | 25         |
+| JORDAN ARCHULETA     | 30         |
+| RUBY WASHINGTON      | 28         |
+| STANLEY SCROGGINS    | 30         |
+| ...                  | ...        |
+
+### Conclusiones:
+
+El objetivo de este ejercicio era crear una tabla temporal que almacenara el número de alquileres por cliente. Esta tabla temporal puede ser útil para realizar análisis de frecuencia de alquileres y generar reportes de clientes activos.
+
+---
+
+# Ejercicio 52:
+
+Crear una tabla temporal denominada `peliculas_alquiladas` que almacene las películas que han sido alquiladas al menos 10 veces.
+
+## Consulta SQL
+
+```sql
+CREATE TEMPORARY TABLE peliculas_alquiladas_ AS
+SELECT
+    f.film_id AS "id_película",
+    f.title AS "película",
+    COUNT(r.rental_id) AS "alquileres"
+FROM film AS f
+    LEFT JOIN inventory AS i
+    ON f.film_id = i.film_id
+    LEFT JOIN rental AS r
+    ON i.inventory_id = r.inventory_id
+GROUP BY f.film_id, f.title
+HAVING COUNT(r.rental_id) >= 10;
+-- Consulta para ver los resultados de la tabla temporal peliculas_alquiladas_
+SELECT *
+FROM "peliculas_alquiladas_";
+```
+
+### Pasos realizados:
+
+1. Creación de la tabla temporal:
+
+   - Utilizamos la sentencia `CREATE TEMPORARY TABLE` para crear la tabla `peliculas_alquiladas_`.
+   - La tabla contiene tres columnas:
+     - `id_película`: El identificador único de la película (campo `film_id` de la tabla `film`).
+     - `película`: El título de la película (campo `title` de la tabla `film`).
+     - `alquileres`: El número total de veces que la película ha sido alquilada. Esto se obtiene mediante la función `COUNT`, que cuenta los registros en la tabla rental para cada película.
+
+2. Joins entre las tablas:
+
+   - Se realiza un `LEFT JOIN` entre las tablas `film` e `inventory` usando `film_id` para asociar las películas con los inventarios.
+   - Se realiza otro `LEFT JOIN` entre las tablas `inventory` y `rental` utilizando inven`tory_id para contar cuántas veces ha sido alquilada cada película.
+
+3. Agrupación por película:
+
+   - Se agrupan los resultados por `film_id` y `title`, lo que permite contar el número de alquileres por cada película de manera individual.
+
+4. Filtrado de resultados:
+
+   - Se utiliza la cláusula `HAVING` para filtrar las películas que han sido alquiladas al menos 10 veces `(COUNT(r.rental_id) >= 10)`.
+
+5. Selección de resultados:
+   - Se realiza un `SELECT *` para visualizar los datos almacenados en la tabla temporal `peliculas_alquiladas_`.
+
+### Resultados (extracto):
+
+| id_película | película           | alquileres |
+| ----------- | ------------------ | ---------- |
+| 652         | PAJAMA JAWBREAKER  | 14         |
+| 273         | EFFECT GLADIATOR   | 25         |
+| 51          | BALLOON HOMEWARD   | 23         |
+| 951         | VOYAGE LEGALLY     | 28         |
+| 70          | BIKINI BORROWERS   | 17         |
+| 350         | GARDEN ISLAND      | 20         |
+| 539         | LUCK OPUS          | 10         |
+| 946         | VIRTUAL SPOILERS   | 14         |
+| 176         | CONGENIALITY QUEST | 22         |
+| 576         | MIGHTY LUCK        | 12         |
+| ...         | ...                | ...        |
+
+### Conclusiones:
+
+El ejercicio tenía como objetivo crear una tabla temporal que almacenara las películas que han sido alquiladas al menos 10 veces. La tabla resultante puede ser útil para identificar las películas más populares y frecuentemente alquiladas en la base de datos. Esta información podría ser valiosa para tomar decisiones comerciales, como la reposición de inventario o promociones.
+
+---
+
+# Ejercicio 53:
+
+Encontrar el título de las películas que han sido alquiladas por el cliente con el nombre ‘Tammy Sanders’ y que aún no se han devuelto. Los resultados deben ordenarse alfabéticamente por título de película.
+
+## Consulta SQL
+
+```sql
+SELECT
+    f.title AS "película"
+FROM customer AS c
+    LEFT JOIN rental AS r
+    ON c.customer_id = r.customer_id
+    LEFT JOIN inventory AS i
+    ON r.inventory_id = i.inventory_id
+    LEFT JOIN film AS f
+    ON i.film_id = f.film_id
+WHERE c.first_name ILIKE 'Tammy'
+  AND c.last_name ILIKE 'Sanders'
+  AND r.return_date IS NULL
+ORDER BY f.title;
+```
+
+### Pasos realizados:
+
+1. Selección de columnas:
+
+   - Se selecciona el título de la película (`f.title`) de la tabla `film`.
+
+2. Joins entre las tablas:
+
+   - Se realiza un `LEFT JOIN` entre las tablas `customer` y `rental` para vincular a los clientes con sus alquileres.
+   - Se realiza otro `LEFT JOIN` entre `rental` e `inventory` para vincular los alquileres con los productos de inventario.
+   - Finalmente, se realiza un `LEFT JOIN` entre `inventory` y `film` para vincular los productos de inventario con las películas.
+
+3. Condiciones de filtrado:
+
+   - La consulta filtra los resultados por el nombre del cliente. Utilizando el operador `ILIKE`, se buscan clientes cuyo primer nombre sea `Tammy` y su apellido sea `Sanders`. El uso de `ILIKE` permite que la búsqueda sea insensible a mayúsculas y minúsculas.
+   - Se filtra también por aquellos alquileres cuya fecha de devolución (`return_date`) sea `NULL`, es decir, que no han sido devueltos aún.
+
+4. Ordenación de los resultados:
+   - Los resultados se ordenan alfabéticamente por el título de la película utilizando `ORDER BY f.title`
+
+### Resultados:
+
+| película        |
+| --------------- |
+| LUST LOCK       |
+| SLEEPY JAPANESE |
+| TROUBLE DATE    |
+
+### Conclusiones:
+
+La consulta muestra las 3 películas alquiladas por el cliente **Tammy Sanders** que todavía no han sido devueltas.
+
+---
+
+# Ejercicio 54:
+
+Encontrar los nombres de los actores que han participado en al menos una película de la categoría Sci-Fi. Los resultados deben ordenarse alfabéticamente por el apellido del actor.
+
+## Consulta SQL
+
+```sql
+SELECT nombre_actor
+FROM (
+    SELECT DISTINCT
+        CONCAT(a.first_name, ' ', a.last_name) AS nombre_actor,
+        a.last_name
+    FROM actor AS a
+    INNER JOIN film_actor AS fa
+        ON a.actor_id = fa.actor_id
+    INNER JOIN film AS f
+        ON fa.film_id = f.film_id
+    INNER JOIN film_category AS fc
+        ON f.film_id = fc.film_id
+    INNER JOIN category AS c
+        ON fc.category_id = c.category_id
+    WHERE c.name = 'Sci-Fi'
+) AS subconsulta
+ORDER BY last_name;
+```
+
+### Pasos realizados:
+
+1. Elección de columnas:
+
+   - Se selecciona el nombre completo del actor (`first_name + last_name`) como `nombre_actor`.
+   - También se incluye `last_name` para ordenar alfabéticamente por apellido en la subconsulta.
+
+2. INNER JOINS entre tablas:
+
+   - `actor` se une con `film_actor` para relacionar actores con películas.
+   - `film_actor` se une con `film` para obtener las películas.
+   - `film` se une con `film_category` para conocer su categoría.
+   - `film_category` se une con `category` para obtener el nombre de la categoría.
+
+3. Condición de filtrado:
+
+   - Se seleccionan solo las películas cuya categoría sea exactamente `Sci-Fi`.
+
+4. DISTINCT y ordenamiento:
+   - `DISTINCT` asegura que un actor aparezca una sola vez aunque haya actuado en varias películas de `Sci-Fi`.
+   - El ordenamiento final se realiza por `last_name` para mostrar los actores alfabéticamente por su apellido.
+
+### Resultados (extracto):
+
+| nombre_actor     |
+| ---------------- |
+| CHRISTIAN AKROYD |
+| KIRSTEN AKROYD   |
+| DEBBIE AKROYD    |
+| CUBA ALLEN       |
+| KIM ALLEN        |
+| ANGELINA ASTAIRE |
+| RUSSELL BACALL   |
+| AUDREY BAILEY    |
+| JESSICA BAILEY   |
+| HARRISON BALE    |
+| ...              |
+
+### Conclusiones:
+
+Esta consulta permite identificar qué actores han participado en películas de ciencia ficción, mostrando resultados sin duplicados y de manera organizada por apellido. El uso de INNER JOIN garantiza que solo se consideren actores vinculados a películas de esa categoría.
+
+---
+
+# Ejercicio 55
+
+Encuentra el nombre y apellido de los actores que han actuado en películas que se alquilaron después de que la película _"Spartacus Cheaper"_ se alquilara por primera vez. Ordena los resultados alfabéticamente por apellido.
+
+---
+
+## 📌 Consulta SQL
+
+```sql
+WITH primer_alquiler AS (
+    SELECT
+        MIN(r.rental_date) AS fecha_1er_alquiler
+    FROM rental AS r
+    LEFT JOIN inventory AS i
+        ON r.inventory_id = i.inventory_id
+    LEFT JOIN film AS f
+        ON i.film_id = f.film_id
+    WHERE f.title ILIKE 'Spartacus Cheaper'
+)
+
+SELECT DISTINCT
+    CONCAT(a.first_name, ' ', a.last_name) AS actor,
+    a.last_name
+FROM actor AS a
+LEFT JOIN film_actor AS fa
+    ON a.actor_id = fa.actor_id
+LEFT JOIN film AS f
+    ON fa.film_id = f.film_id
+LEFT JOIN inventory AS i
+    ON f.film_id = i.film_id
+LEFT JOIN rental AS r
+    ON i.inventory_id = r.inventory_id
+WHERE r.rental_date > (
+    SELECT fecha_1er_alquiler
+    FROM primer_alquiler
+)
+ORDER BY a.last_name;
+
+```
+
+### Pasos realizados:
+
+1. CTE primer_alquiler
+
+   - Se calcula la fecha del primer alquiler de la película `Spartacus Cheaper`, utilizando `MIN(r.rental_date)`.
+   - Se emplea `ILIKE` para evitar problemas por diferencias de mayúsculas/minúsculas en el nombre del título.
+
+2. Consulta principal
+   - Se realiza `LEFT JOINS` entre las tablas `actor`, `film_actor`, `film`, `inventory` y `rental`.
+   - Se filtran las películas alquiladas posteriores a la fecha obtenida en el CTE.
+   - Se usa `DISTINCT` para evitar duplicados de actores que hayan participado en múltiples películas o alquileres.
+   - Se incluye el apellido (`a.last_name`) en el `SELECT` para poder ordenar correctamente los resultados por él.
+
+### Resultados:
+
+| actor            | last_name |
+| ---------------- | --------- |
+| CHRISTIAN AKROYD | AKROYD    |
+| KIRSTEN AKROYD   | AKROYD    |
+| DEBBIE AKROYD    | AKROYD    |
+| KIM ALLEN        | ALLEN     |
+| MERYL ALLEN      | ALLEN     |
+| CUBA ALLEN       | ALLEN     |
+| ANGELINA ASTAIRE | ASTAIRE   |
+| RUSSELL BACALL   | BACALL    |
+| AUDREY BAILEY    | BAILEY    |
+| ...              | ...       |
+
+### Conclusiones:
+
+- El resultado muestra un amplio listado de actores que han participado en películas **alquiladas después** del primer alquiler de _"Spartacus Cheaper"_, lo cual indica que esta película no fue una de las primeras en ser alquilada dentro del histórico.
+
+- La presencia de tantos actores distintos sugiere que se han alquilado muchas películas posteriormente, y que el catálogo disponible después de ese punto fue extenso.
+
+- Se repiten muchos apellidos, lo cual pone de manifiesto que varios actores con el mismo apellido (posiblemente ficticios o referencias a actores reales) han estado activos en películas posteriores a dicha fecha.
+
+---
+
+## Ejercicio 56
+
+Encuentra el nombre y apellido de los actores que **no han actuado** en ninguna película de la categoría **Music**.
+
+### 📌 Instrucción SQL
+
+```sql
+SELECT
+		CONCAT(a.first_name, ' ', a.last_name) AS "actor"
+FROM actor AS a
+WHERE a.actor_id NOT IN (
+	SELECT DISTINCT fa.actor_id
+	FROM film_actor AS fa
+		LEFT JOIN film AS f
+			ON fa.film_id = f.film_id
+		LEFT JOIN film_category AS fc
+			ON f.film_id = fc.film_id
+		LEFT JOIN category AS c
+			ON fc.category_id = c.category_id
+		WHERE c."name" ILIKE 'Music'
+);
+```
+
+### Pasos realizados:
+
+1. Se parte de la tabla `actor` para obtener la lista completa de actores.
+
+2. Se excluyen todos aquellos cuyo `actor_id` aparece relacionado con películas de la categoría `Music` mediante subconsulta.
+   - La subconsulta recorre las relaciones necesarias entre `film_actor`, `film`, `film_category` y `category` para identificar los actores que han participado en películas etiquetadas como `Music`.
+   - Se utiliza `NOT IN` para quedarnos únicamente con aquellos actores que nunca han actuado en ninguna película de dicha categoría.
+
+### Resultados (extracto):
+
+| actor           |
+| --------------- |
+| BETTE NICHOLSON |
+| GRACE MOSTEL    |
+| CUBA OLIVIER    |
+| FRED COSTNER    |
+| ELVIS MARX      |
+| CAMERON STREEP  |
+| RIP CRAWFORD    |
+| SISSY SOBIESKI  |
+| MILLA PECK      |
+| ...             |
+
+### Conclusiones:
+
+El listado obtenido refleja que 54 actores no han participado en películas de la categoría `Music`, lo que permite ver que no es una de las categorías más ampliamente repartidas entre el elenco.
+
+Esta consulta permite detectar fácilmente brechas de participación por categoría, y es aplicable a estudios sobre diversificación de roles o especialización de actores por género cinematográfico.
+
+---
+
+# Ejercicio 57
+
+Encuentra el título de todas las películas que fueron alquiladas por más de 8 días.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    f.title AS "pelicula",
+    EXTRACT(DAY FROM (r.return_date - r.rental_date)) AS "días_alquiler"
+FROM rental AS r
+    LEFT JOIN inventory AS i
+        ON r.inventory_id = i.inventory_id
+    LEFT JOIN film AS f
+        ON i.film_id = f.film_id
+WHERE EXTRACT(DAY FROM (r.return_date - r.rental_date)) > 8;
+```
+
+### Pasos realizados:
+
+1. Se calcula la diferencia entre `return_date` y `rental_date`, extrayendo únicamente la parte correspondiente a los días mediante la función `EXTRACT(DAY FROM ...)`.
+
+2. Se hace uso de `LEFT JOIN` para enlazar las tablas `rental`, `inventory` y `film`. Esto permite obtener la relación entre las películas, los inventarios y los alquileres.
+
+3. Se filtran los resultados con la cláusula `WHERE` para que solo se muestren aquellos registros donde la duración del alquiler supere los `8 días`.
+
+### Resultados (extracto):
+
+| pelicula          | días_alquiler |
+| ----------------- | ------------- |
+| LOVE SUICIDES     | 9             |
+| PELICAN COMFORTS  | 9             |
+| ALLEY EVOLUTION   | 9             |
+| ROSES TREASURE    | 9             |
+| PATIENT SISTER    | 9             |
+| VOYAGE LEGALLY    | 9             |
+| ROBBERS JOON      | 9             |
+| SHOW LORD         | 9             |
+| NETWORK PEAK      | 9             |
+| TRADING PINOCCHIO | 9             |
+
+### Conclusiones:
+
+El resultado de la consulta es una lista de películas cuya duración de alquiler fue superior a 8 días. En muchos casos, el número de días es 9, lo que indica que hubo algunos alquileres con retraso en la devolución.
+
+---
+
+# Ejercicio 58
+
+Encuentra el título de todas las películas que son de la misma categoría que ‘Animation’.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    f.title AS "película",
+    c."name" AS "categoría"
+FROM film AS f
+    INNER JOIN film_category AS fc
+        ON f.film_id = fc.film_id
+    INNER JOIN category AS c
+        ON fc.category_id = c.category_id
+WHERE c."name" = 'Animation';
+```
+
+### Pasos realizados:
+
+1. Se realiza un `INNER JOIN` entre las tablas `film`, `film_category` y `category` para relacionar las películas con sus categorías.
+
+   - Se una `INNER JOIN` para asegurar que solo se muestren los registros que tienen una categoría asignada.
+
+2. Se filtra por la categoría específica `Animation` en la cláusula `WHERE`.
+
+3. La consulta selecciona el título de las películas (`f.title`) y la categoría (`c.name`) para mostrar en el resultado.
+
+### Resultados:
+
+| película             | categoría |
+| -------------------- | --------- |
+| ALTER VICTORY        | Animation |
+| ANACONDA CONFESSIONS | Animation |
+| ARGONAUTS TOWN       | Animation |
+| BIKINI BORROWERS     | Animation |
+| BLACKOUT PRIVATE     | Animation |
+| BORROWERS BEDAZZLED  | Animation |
+| CANYON STOCK         | Animation |
+| CAROL TEXAS          | Animation |
+| CHAMPION FLATLINERS  | Animation |
+| ...                  | ...       |
+
+### Conclusiones:
+
+## Esta consulta devuelve un total de `52 películas` que están catalogadas dentro de la categoría `Animation`.
+
+# Ejercicio 59
+
+Encuentra los nombres de las películas que tienen la misma duración que la película con el título ‘Dancing Fever’. Ordena los resultados alfabéticamente por título de película.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    f.title AS "película",
+    f.length AS "duración"
+FROM film AS f
+WHERE f.length = (
+    SELECT f.length
+    FROM film AS f
+    WHERE f.title ILIKE 'Dancing Fever'
+)
+ORDER BY f.title;
+```
+
+### Pasos realizados:
+
+1. Se realiza una `subconsulta dentro de la cláusula WHERE` para obtener la duración de la película 'Dancing Fever'. La subconsulta usa `ILIKE` para hacer la búsqueda insensible a mayúsculas y minúsculas.
+
+2. Después, la consulta principal selecciona el `título` y la `duración` de todas las películas que tienen la misma duración que la película 'Dancing Fever'.
+
+3. Finalmente, se ordenan los resultados alfabéticamente por título de película mediante la cláusula `ORDER BY f.title`.
+
+### Resultados:
+
+| película          | duración |
+| ----------------- | -------- |
+| DANCING FEVER     | 144      |
+| FACTORY DRAGON    | 144      |
+| LAMBS CINCINATTI  | 144      |
+| PACIFIC AMISTAD   | 144      |
+| PRESIDENT BANG    | 144      |
+| STRICTLY SCARFACE | 144      |
+| TOWERS HURRICANE  | 144      |
+| VIRTUAL SPOILERS  | 144      |
+
+### Conclusiones:
+
+## La consulta devuelve `un total de 8 películas` que tienen la misma duración que 'Dancing Fever', que es de `144 minutos`.
+
+# Ejercicio 60
+
+Encuentra los nombres de los clientes que han alquilado al menos 7 películas distintas. Ordena los resultados alfabéticamente por apellido.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    CONCAT(c.first_name, ' ', c.last_name) AS "nombre_cliente",
+    COUNT(DISTINCT (i.film_id)) AS "películas_distintas"
+FROM customer AS c
+    INNER JOIN rental AS r
+        ON c.customer_id = r.customer_id
+    INNER JOIN inventory AS i
+        ON r.inventory_id = i.inventory_id
+GROUP BY c.first_name, c.last_name
+HAVING COUNT(DISTINCT (i.film_id)) >= 7
+ORDER BY c.last_name;
+```
+
+### Pasos realizados:
+
+1. `JOINs`: La consulta utiliza dos `INNER JOIN`:
+
+   - Se une la tabla `customer` con la tabla `rental` utilizando `customer_id`, lo que nos permite acceder a los alquileres de los clientes.
+   - Se une la tabla `rental` con la tabla `inventory` utilizando `inventory_id`, lo que permite identificar las películas específicas que han sido alquiladas.
+
+2. `GROUP BY`: La consulta agrupa los resultados por el primer y último nombre del cliente para poder contar las películas distintas que cada cliente ha alquilado.
+
+3. `COUNT(DISTINCT)`: La función `COUNT(DISTINCT i.film_id)` se usa para contar las películas distintas alquiladas por cada cliente.
+
+4. `HAVING`: Se aplica una condición para filtrar aquellos clientes que han alquilado al menos 7 películas distintas.
+
+5. `ORDER BY`: Los resultados se ordenan alfabéticamente por el apellido del cliente (`c.last_name`).
+
+### Resultados (extracto):
+
+| nombre_cliente   | películas_distintas |
+| ---------------- | ------------------- |
+| RAFAEL ABNEY     | 21                  |
+| NATHANIEL ADAM   | 28                  |
+| KATHLEEN ADAMS   | 26                  |
+| DIANA ALEXANDER  | 27                  |
+| GORDON ALLARD    | 32                  |
+| SHIRLEY ALLEN    | 30                  |
+| CHARLENE ALVAREZ | 26                  |
+| LISA ANDERSON    | 24                  |
+| JOSE ANDREW      | 25                  |
+| ...              | ...                 |
+
+### Conclusiones:
+
+La consulta ha identificado a `100 clientes` que han alquilado al menos 7 películas distintas.
+Los clientes con `mayor cantidad` de alquileres están entre los `21 y 42`.
+
+---
+
+# Ejercicio 61
+
+Encuentra la cantidad total de películas alquiladas por categoría y muestra el nombre de la categoría junto con el recuento de alquileres.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    c."name" AS "categoría",
+    COUNT(r.rental_id) AS "recuento_alquileres"
+FROM category AS c
+    LEFT JOIN film_category AS fc
+        ON c.category_id = fc.category_id
+    LEFT JOIN film AS f
+        ON fc.film_id = f.film_id
+    LEFT JOIN inventory AS i
+        ON f.film_id = i.film_id
+    LEFT JOIN rental AS r
+        ON i.inventory_id = r.inventory_id
+GROUP BY c."name";
+```
+
+### Pasos realizados:
+
+1. La consulta utiliza varios `LEFT JOIN` para conectar las diferentes tablas:
+
+   - Se une la tabla `category` con `film_category` utilizando `category_id` para obtener la relación entre las categorías y las películas.
+   - Se unen las tablas `film_category` y `film` mediante `film_id` para acceder a las películas dentro de cada categoría.
+   - Se une `film` con `inventory` utilizando `film_id` para vincular las películas con su inventario disponible.
+   - Se unen las tablas `inventory` y `rental` utilizando `inventory_id` para contabilizar los alquileres de cada película.
+
+2. Se utiliza la función `COUNT(r.rental_id)` para contar la cantidad total de alquileres asociados a cada categoría de película.
+
+3. Se agrupan los resultados por el nombre de la categoría (`c.name`) para mostrar el número de alquileres por cada una de ellas.
+
+### Resultados:
+
+| categoría   | recuento_alquileres |
+| ----------- | ------------------- |
+| Sports      | 1179                |
+| Classics    | 939                 |
+| New         | 940                 |
+| Family      | 1096                |
+| Comedy      | 941                 |
+| Animation   | 1166                |
+| Travel      | 837                 |
+| Music       | 830                 |
+| Drama       | 1060                |
+| Horror      | 846                 |
+| Sci-Fi      | 1101                |
+| Games       | 969                 |
+| Documentary | 1050                |
+| Foreign     | 1033                |
+| Action      | 1112                |
+| Children    | 945                 |
+
+### Conclusiones:
+
+La consulta proporciona el total de películas alquiladas por categoría, lo que permite entender la demanda por cada tipo de película.
+
+En general, las categorías con mayor número de alquileres son **Sports (1179 alquileres), Animation (1166 alquileres) y Action (1112 alquileres)**.
+
+Las categorías como **Travel (837 alquileres) y Music (830 alquileres)** tienen un menor número de alquileres.
+
+Este análisis es útil para evaluar el interés de los clientes en diferentes géneros de películas y podría ayudar a ajustar la oferta de películas en base a la popularidad de cada categoría.
+
+---
+
+# Ejercicio 62
+
+Encuentra el número de películas por categoría estrenadas en el año 2006.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    COUNT(f.film_id) AS "películas",
+    c.name AS "categoría",
+    f.release_year AS "año_estreno"
+FROM category AS c
+    LEFT JOIN film_category AS fc
+        ON c.category_id = fc.category_id
+    LEFT JOIN film AS f
+        ON fc.film_id = f.film_id
+WHERE f.release_year = '2006'
+GROUP BY c."name", f.release_year;
+```
+
+### Pasos realizados:
+
+1. Se enlazan las tablas `category`, `film_category` y `film` para acceder a la información de las películas por categoría.
+
+2. Se limitan los resultados únicamente a las películas estrenadas en ese año con `WHERE f.release_year = '2006'`
+
+3. Se agrupan los resultados por `categoría` y `año de estreno`, lo cual permite obtener el número de películas por cada categoría exclusivamente para el año `2006`.
+
+4.Se contabiliza la cantidad de películas (film_id) por cada grupo - `COUNT(f.film_id) AS "películas"`
+
+### Resultados:
+
+| películas | categoría   | año_estreno |
+| --------- | ----------- | ----------- |
+| 74        | Sports      | 2006        |
+| 57        | Classics    | 2006        |
+| 63        | New         | 2006        |
+| 69        | Family      | 2006        |
+| 58        | Comedy      | 2006        |
+| 66        | Animation   | 2006        |
+| 57        | Travel      | 2006        |
+| 51        | Music       | 2006        |
+| 62        | Drama       | 2006        |
+| 56        | Horror      | 2006        |
+| 61        | Sci-Fi      | 2006        |
+| 61        | Games       | 2006        |
+| 68        | Documentary | 2006        |
+| 73        | Foreign     | 2006        |
+| 64        | Action      | 2006        |
+| 60        | Children    | 2006        |
+
+### Conclusiones:
+
+En el año 2006, todas las categorías de películas registraron estrenos.
+
+Las categorías con mayor número de estrenos fueron **Sports (74 películas), Foreign (73) y Family (69)**
+
+Las categorías con menor número fueron **Music (51) y Horror (56)**.
+
+---
+
+# Ejercicio 63
+
+Obtén todas las combinaciones posibles de trabajadores con las tiendas que tenemos.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    CONCAT(s.first_name, ' ', s.last_name) AS "trabajador",
+    s2.store_id AS "tienda"
+FROM staff AS s
+    CROSS JOIN store AS s2;
+```
+
+### Pasos realizados:
+
+1. CROSS JOIN: Esta cláusula genera todas las combinaciones posibles de empleados con tiendas, sin necesidad de que haya una relación directa entre ellas.
+
+2. CONCAT: Se utiliza para unir el nombre y el apellido de cada trabajador en una sola columna.
+
+### Resultados:
+
+| trabajador   | tienda |
+| ------------ | ------ |
+| Mike Hillyer | 1      |
+| Jon Stephens | 1      |
+| Mike Hillyer | 2      |
+| Jon Stephens | 2      |
+
+### Conclusiones:
+
+Se genera una combinación completa entre trabajadores y tiendas.
+
+## Podría ser útil para análisis como asignaciones hipotéticas, cálculos de disponibilidad o planificación logística, permite ver cómo cada trabajador podría estar relacionado potencialmente con cada tienda.
+
+# Ejercicio 64
+
+Encuentra la cantidad total de películas alquiladas por cada cliente y muestra el ID del cliente, su nombre y apellido junto con la cantidad de películas alquiladas.
+
+## Consulta SQL:
+
+```sql
+SELECT
+    c.customer_id AS "id_cliente",
+    CONCAT(c.first_name, ' ', c.last_name) AS "nombre_cliente",
+    COUNT(r.rental_id) AS "cantidad_alquileres"
+FROM customer AS c
+    LEFT JOIN rental AS r
+        ON c.customer_id = r.customer_id
 GROUP BY c.customer_id, c.first_name, c.last_name
 ORDER BY cantidad_alquileres DESC;
 ```
 
-### 📊 Resultados (fragmento)
+### Pasos realizados:
 
-| id_cliente | nombre_cliente  | cantidad_alquileres |
-|------------|------------------|----------------------|
-| 148        | ELEANOR HUNT     | 46                   |
-| 526        | KARL SEAL        | 45                   |
-| 144        | CLARA SHAW       | 42                   |
-| ...        | ...              | ...                  |
+1. Se utiliza `LEFT JOIN` para asegurar que todos los clientes aparezcan en el resultado, incluso si no han realizado alquileres.
 
-### ✅ Conclusiones
+2. `COUNT(r.rental_id)`: Cuenta cuántos registros de alquiler están asociados a cada cliente.
 
-- La mayoría de los clientes han alquilado entre 30 y 46 películas.
-- La distribución sugiere que hay un alto nivel de fidelización entre muchos clientes, con un número constante de alquileres.
-- El uso de `LEFT JOIN` asegura que ningún cliente quede fuera, aunque no tenga registros de alquiler (esto es útil para bases más grandes o en evolución).
-- Esta consulta es útil para estudios de comportamiento del cliente, como análisis RFM (Recencia, Frecuencia, Valor monetario).
+3. `GROUP BY`: Agrupa los resultados por cliente para obtener el total de alquileres por cada uno.
 
+4.`ORDER BY cantidad_alquileres DESC`: Ordena de mayor a menor según el número de alquileres
 
+### Resultados (EXTRACTO):
 
+| id_cliente | nombre_cliente | cantidad_alquileres |
+| ---------- | -------------- | ------------------- |
+| 148        | ELEANOR HUNT   | 46                  |
+| 526        | KARL SEAL      | 45                  |
+| 144        | CLARA SHAW     | 42                  |
+| 236        | MARCIA DEAN    | 42                  |
+| 75         | TAMMY SANDERS  | 41                  |
+| 469        | WESLEY BULL    | 40                  |
+| 197        | SUE PETERS     | 40                  |
+| 137        | RHONDA KENNEDY | 39                  |
+| 178        | MARION SNYDER  | 39                  |
+| ...        | ...            | ...                 |
 
+### Conclusiones:
 
+Esta consulta permite identificar a los clientes más activos en cuanto a alquileres, lo cual es útil para segmentaciones de marketing, promociones personalizadas o análisis de fidelización. También se pueden detectar clientes inactivos, si su número de alquileres es 0.
+
+---

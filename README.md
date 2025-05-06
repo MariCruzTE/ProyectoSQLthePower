@@ -36,7 +36,7 @@ PROYECTOSQLTHEPOWER/
 |--- .gitignore                  # Conf. para ignorar archivos/carpetas en el control de versiones
 ```
 
-## 🛠 Instalación y Requisitos
+## Instalación y Requisitos
 
 Este proyecto utiliza PostgreSQL para las consultas SQL y requiere las siguientes herramientas:
 
@@ -129,11 +129,6 @@ WHERE f.rating = 'R';
 | APOCALYPSE FLAMINGOS | R             |
 | BOULEVARD MOB        | R             |
 | ARMY FLINTSTONES     | R             |
-| BADMAN DAWN          | R             |
-| BANGER PINOCCHIO     | R             |
-| BEAR GRACELAND       | R             |
-| BEAST HUNCHBACK      | R             |
-| BEVERLY OUTLAW       | R             |
 | ...                  | ...           |
 
 ### ✅ Conclusiones
@@ -221,7 +216,7 @@ Ordena las películas por duración de forma ascendente
 - Consultamos la tabla `film` para obtener el título de la película y la duración.
 - Ordenamos los resultados de forma ascendente según la duración.
 
-### 📌 Consulta SQL
+###  Consulta SQL
 
 ```sql
 SELECT
@@ -231,7 +226,7 @@ FROM film AS f
 ORDER BY "duración";
 ```
 
-### 📊 Resultados (fragmento)
+###  Resultados (fragmento)
 
 | tìtulo              | duración |
 | ------------------- | -------- |
@@ -246,7 +241,7 @@ ORDER BY "duración";
 | HALLOWEEN NUTS      | 47       |
 | SHANGHAI TYCOON     | 47       |
 
-### ✅ Conclusiones
+###  Conclusiones
 
 - El ordenamiento de las películas por duración ha sido realizado correctamente en orden ascendente.
 - Los primeros resultados muestran películas con una duración de 46 minutos.
@@ -263,7 +258,7 @@ Encuentra el nombre y apellido de los actores que tengan 'Allen' en su apellido
 - Utilizamos la condición `ILIKE` para buscar los apellidos que contengan 'Allen' sin importar mayúsculas/minúsculas.
 - Usamos `DISTINCT` para asegurarnos de que los resultados sean únicos.
 
-### 📌 Consulta SQL
+###  Consulta SQL
 
 ```sql
 SELECT
@@ -272,7 +267,7 @@ FROM actor AS a
 WHERE a.last_name ILIKE  'Allen';
 ```
 
-### 📊 Resultados (fragmento)
+###  Resultados (fragmento)
 
 | nombre_completo |
 | --------------- |
@@ -280,7 +275,7 @@ WHERE a.last_name ILIKE  'Allen';
 | KIM ALLEN       |
 | MERYL ALLEN     |
 
-### ✅ Conclusiones
+###  Conclusiones
 
 - La consulta devuelve los actores cuyos apellidos son exactamente 'Allen', sin importar las mayúsculas o minúsculas.
 - Se obtienen tres resultados únicos.
@@ -297,7 +292,7 @@ Encuentra la cantidad total de películas en cada clasificación de la tabla "fi
 - Utilizamos la función de agregación `COUNT()` para contar el número de películas.
 - Agrupamos los resultados por la columna `rating` y ordenamos por el total de películas.
 
-### 📌 Consulta SQL
+###  Consulta SQL
 
 ```sql
 SELECT
@@ -308,7 +303,7 @@ GROUP BY rating
 ORDER BY total_peliculas;
 ```
 
-### 📊 Resultados (fragmento)
+###  Resultados (extracto)
 
 | clasificación | total_peliculas |
 | ------------- | --------------- |
@@ -317,8 +312,8 @@ ORDER BY total_peliculas;
 | R             | 195             |
 | NC-17         | 210             |
 | PG-13         | 223             |
-
-### ✅ Conclusiones
+| ...           | ...             |
+###  Conclusiones
 
 - La consulta muestra la cantidad total de películas por cada clasificación.
 - El número de películas varía según la clasificación, con la categoría 'PG-13' teniendo la mayor cantidad de películas.
@@ -1812,7 +1807,7 @@ La base de datos contiene varios actores que comparten nombre. En este caso, PEN
 
 ---
 
-# Ejercicio 42: Alquileres y nombres de los clientes
+# Ejercicio 42: 
 
 Encuentra todos los alquileres registrados en la base de datos y los nombres completos de los clientes que los realizaron.
 
@@ -1862,7 +1857,7 @@ Esta consulta relaciona correctamente cada alquiler con su cliente.
 
 ---
 
-# 🧪 Ejercicio 43: Clientes y sus alquileres (si existen)
+# 🧪 Ejercicio 43: 
 
 Muestra todos los clientes y sus alquileres si existen, incluyendo aquellos que no tienen alquileres.
 
@@ -1908,8 +1903,9 @@ LEFT JOIN rental AS r
 
 ### Conclusiones:
 
-## Es una consulta útil para obtener una lista completa de clientes, con o sin alquileres.
+ Es una consulta útil para obtener una lista completa de clientes, con o sin alquileres.
 
+---
 # Ejercicio 44:
 
 Realiza un `CROSS JOIN` entre las tablas `film` y `category`.  
@@ -2766,7 +2762,9 @@ WHERE c."name" = 'Animation';
 
 ### Conclusiones:
 
-## Esta consulta devuelve un total de `52 películas` que están catalogadas dentro de la categoría `Animation`.
+Esta consulta devuelve un total de `52 películas` que están catalogadas dentro de la categoría `Animation`.
+
+---
 
 # Ejercicio 59
 
@@ -2810,8 +2808,9 @@ ORDER BY f.title;
 
 ### Conclusiones:
 
-## La consulta devuelve `un total de 8 películas` que tienen la misma duración que 'Dancing Fever', que es de `144 minutos`.
+La consulta devuelve `un total de 8 películas` que tienen la misma duración que 'Dancing Fever', que es de `144 minutos`.
 
+---
 # Ejercicio 60
 
 Encuentra los nombres de los clientes que han alquilado al menos 7 películas distintas. Ordena los resultados alfabéticamente por apellido.
@@ -3031,7 +3030,9 @@ FROM staff AS s
 
 Se genera una combinación completa entre trabajadores y tiendas.
 
-## Podría ser útil para análisis como asignaciones hipotéticas, cálculos de disponibilidad o planificación logística, permite ver cómo cada trabajador podría estar relacionado potencialmente con cada tienda.
+Podría ser útil para análisis como asignaciones hipotéticas, cálculos de disponibilidad o planificación logística, permite ver cómo cada trabajador podría estar relacionado potencialmente con cada tienda.
+
+---
 
 # Ejercicio 64
 

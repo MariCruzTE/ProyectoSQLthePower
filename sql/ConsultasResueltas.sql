@@ -83,7 +83,7 @@ ___________________________________________________________________________
 
 SELECT
 		MIN(f.length) AS "duración_mínima",
-		MAX(f.length) AS "duración_mánima"
+		MAX(f.length) AS "duración_máxima"
 FROM film AS f 
 ___________________________________________________________________________
 --	11. Encuentra lo que costó el antepenúltimo alquiler ordenado por dia
@@ -210,7 +210,7 @@ ___________________________________________________________________________
 -- 23. Números de alquiler por día ordenados por cantidad de alquiler DESC
 
 SELECT 
-		SUM(r.rental_id) AS "alquileres",
+		COUNT(r.rental_id) AS "alquileres",
 		r.rental_date::date AS "fecha"
 FROM rental AS r 
 GROUP BY r.rental_date::date
@@ -284,7 +284,7 @@ FROM film AS f
 	LEFT JOIN inventory AS i 
 	ON f.film_id = i.film_id 
 GROUP BY f.title
-ORDER BY cantidad_inventario DESC 
+ORDER BY cantidad_inventario DESC;
 ___________________________________________________________________________
 
 --	30. Obtener los actores y el número de peliculas en las que han actuado
@@ -492,7 +492,7 @@ ___________________________________________________________________________
 /*	48. Crea una vista llamada "actor_num_peliculas" que muestre los nomres de los actores 
 		numero de peliculas en las que han participado		*/
  
-CREATE VIEW actor_num_pelicula AS 
+CREATE VIEW actor_num_peliculas AS 
 SELECT
 		CONCAT(a.first_name, ' ', a.last_name) AS "actor",
 		COUNT(fa.film_id) AS "nºpelículas"
@@ -548,7 +548,7 @@ __________________________________________________________________________
 /*	52. Crea una tabla temporal llamada "peliculas_alquiladas" que almacene 
  		las peliculas que han sido alquiladas al menos 10 veces		*/
 
-CREATE TEMPORARY TABLE peliculas_alquiladas_ AS 
+CREATE TEMPORARY TABLE peliculas_alquiladas AS 
 SELECT 
 		f.film_id AS "id_película",
 		f.title AS "película",
@@ -587,7 +587,8 @@ ___________________________________________________________________________
 película que pertenece a la categoría ‘Sci-Fi’. Ordena los resultados
 alfabéticamente por apellido.	*/
 
-SELECT nombre_actor
+SELECT nombre_actor,
+	  last_name	
 FROM (
     SELECT DISTINCT 
         CONCAT(a.first_name, ' ', a.last_name) AS nombre_actor,

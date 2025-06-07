@@ -503,7 +503,7 @@ GROUP BY a.first_name, a.last_name;
 
 
 SELECT *
-FROM actor_num_pelicula;
+FROM actor_num_peliculas;
 ___________________________________________________________________________
 --	49. Calcula el número total de alquileres realizados por cada cliente
 
@@ -563,7 +563,7 @@ HAVING COUNT(r.rental_id)>= 10;
 
 
  SELECT *
- FROM "peliculas_alquiladas_";
+ FROM "peliculas_alquiladas";
 ___________________________________________________________________________
 /*	53. Encuentra el título de las películas que han sido alquiladas por el cliente
 		con el nombre ‘Tammy Sanders’ y que aún no se han devuelto. 
